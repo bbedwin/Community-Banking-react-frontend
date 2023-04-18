@@ -1,0 +1,16 @@
+.sidebar {
+    min-width: 15vw;
+    min-height: 100vh;
+}
+
+.sidebar .navlinks ul {
+    list-style: none;
+}
+
+.sidebar .navlinks ul li {
+    padding: 1rem 0;
+}
+
+.sidebar .navlinks ul li a {
+    color: white;
+}

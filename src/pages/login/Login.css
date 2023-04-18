@@ -1,0 +1,15 @@
+.login-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 4rem;
+}
+
+.login-page .left-card .parent-card {
+    min-height: 60vh;
+}
+
+.login-page .right-card img {
+    height: 10rem;
+    width: auto;
+}

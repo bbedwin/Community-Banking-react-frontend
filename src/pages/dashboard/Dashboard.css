@@ -1,0 +1,16 @@
+.stats {
+    min-width: 85vw;
+    min-height: 100vh;
+}
+
+.stats .content .cards .card {
+    border: none !important;
+}
+
+.stats .content .cards .card .card-body i {
+    color: green;
+}
+
+.stats .content .last-transctions .card {
+    border: none !important;
+}
