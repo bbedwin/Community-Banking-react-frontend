@@ -16,7 +16,7 @@ const Dashboard = () => {
                     <div className="cards d-flex justify-content-around">
                         <div className="card px-5">
                             <div className="card-body">
-                                <i class="bi bi-people fs-2"></i>
+                                <i className="bi bi-people fs-2"></i>
                                 <br />
                                 <small>Total Groups</small>
                                 <p className="fw-bold fs-4">4</p>
@@ -24,7 +24,7 @@ const Dashboard = () => {
                         </div>
                         <div className="card px-5">
                             <div className="card-body">
-                                <i class="bi bi-cash-stack fs-2"></i>
+                                <i className="bi bi-cash-stack fs-2"></i>
                                 <br />
                                 <small>Total Contributions</small>
                                 <p className="fw-bold fs-4">$300.04</p>
@@ -32,7 +32,7 @@ const Dashboard = () => {
                         </div>
                         <div className="card px-5">
                             <div className="card-body">
-                                <i class="bi bi-cash fs-2"></i>
+                                <i className="bi bi-cash fs-2"></i>
                                 <br />
                                 <small>Total Loan</small>
                                 <p className="fw-bold fs-4">$30</p>
@@ -40,7 +40,7 @@ const Dashboard = () => {
                         </div>
                         <div className="card px-5">
                             <div className="card-body">
-                                <i class="bi bi-piggy-bank fs-2"></i>
+                                <i className="bi bi-piggy-bank fs-2"></i>
                                 <br />
                                 <small>Total Repaid</small>
                                 <p className="fw-bold fs-4">$20.04</p>
@@ -56,17 +56,17 @@ const Dashboard = () => {
                                     <p className="fw-bold fs-4">Transactions</p>
                                     <p className='fs-4'>38</p>
                                 </div>
-                                <p>
+                                <div>
                                     <p className="fw-bold fs-4">Contributions</p>
                                     <p className='fs-4'>$2,478</p>
-                                </p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <div className="transactions-table">
                         <p className="fw-bold fs-3 text-start">Transactions</p>
-                        <table class="table table-hover">
+                        <table className="table table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>

@@ -19,31 +19,31 @@ const Sidebar = () => {
                     <div className='navlinks text-light'>
                         <ul className='text-start'>
                             <li>
-                                <i class="bi bi-bar-chart fs-4 me-2"></i>
+                                <i className="bi bi-bar-chart fs-4 me-2"></i>
                                 <a href="/dashboard">
                                     Dashboard
                                 </a>
                             </li>
                             <li>
-                                <i class="bi bi-people fs-4 me-2"></i>
+                                <i className="bi bi-people fs-4 me-2"></i>
                                 <a href="/groups">
                                     Groups
                                 </a>
                             </li>
                             <li>
-                                <i class="bi bi-person fs-4 me-2"></i>
+                                <i className="bi bi-person fs-4 me-2"></i>
                                 <a href="/loans">
                                     Loans
                                 </a>
                             </li>
                             <li>
-                                <i class="bi bi-person fs-4 me-2"></i>
+                                <i className="bi bi-person fs-4 me-2"></i>
                                 <a href="">
                                     Trustees
                                 </a>
                             </li>
                             <li>
-                                <i class="bi bi-person fs-4 me-2"></i>
+                                <i className="bi bi-person fs-4 me-2"></i>
                                 <a href="">
                                     Members
                                 </a>

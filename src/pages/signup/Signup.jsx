@@ -1,15 +1,35 @@
-import React from 'react'
+import { React, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import axiosClient from '../../components/Axios'
 import '../login/Login.css'
 import lion from '../../assets/11334.png'
 
 const Signup = () => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
     const navigate = useNavigate()
 
-    const register = () => {
-        console.log('Signed up')
-        navigate('/signin')
+    const register = async (e) => {
+        e.preventDefault()
+
+        try {
+            const response = await axiosClient.post('/users',
+                JSON.stringify({ email, password }),
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+
+            if (response.status == 201) {
+                navigate('/signin')
+            }
+
+        } catch (error) {
+            console.log(error)
+            console.log('Not successful')
+        }
     }
 
     return (
@@ -44,25 +64,26 @@ const Signup = () => {
                     <img src={lion} alt="" />
 
                     <div className='mb-4'>
+                        <p className="fw-bold fs-3">Sign Up</p>
                         <p className="fw-bold">Community Bank</p>
                     </div>
 
                     <form action="" method="post" onSubmit={register} className='text-start'>
-                        <div className="mb-3">
+                        {/* <div className="mb-3">
                             <label htmlFor="firstName" className="form-label">First Name</label>
                             <input type="text" className="form-control" placeholder='John' id="firstName" />
                         </div>
                         <div className="mb-3">
                             <label htmlFor="lastName" className="form-label">Last Name</label>
                             <input type="text" className="form-control" placeholder='Doe' id="lastName" />
-                        </div>
+                        </div> */}
                         <div className="mb-3">
                             <label htmlFor="email" className="form-label">Email address</label>
-                            <input type="email" className="form-control" placeholder='example@mail.com' id="email" />
+                            <input type="email" className="form-control" onChange={(e) => { setEmail(e.target.value) }} placeholder='example@mail.com' id="email" />
                         </div>
                         <div className="mb-3">
                             <label htmlFor="password" className="form-label">Password</label>
-                            <input type="password" className="form-control" placeholder='password' id="password" />
+                            <input type="password" className="form-control" onChange={(e) => { setPassword(e.target.value) }} placeholder='password' id="password" />
                         </div>
 
                         <button type='submit' className="btn btn-success w-100 mt-2">Sign up</button>
