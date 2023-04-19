@@ -9,14 +9,14 @@ const Dashboard = () => {
             <Sidebar />
             <div className='stats container'>
                 <div className="navigation w-100 pb-2">
-                    <Navbar />
+                    <Navbar title={'Dashboard'} />
                 </div>
 
                 <div className="content bg-light pt-3">
                     <div className="cards d-flex justify-content-around">
                         <div className="card px-5">
                             <div className="card-body">
-                                <i class="bi bi-wallet2 fs-2 fw-bold"></i>
+                                <i class="bi bi-people fs-2"></i>
                                 <br />
                                 <small>Total Groups</small>
                                 <p className="fw-bold fs-4">4</p>
@@ -24,7 +24,7 @@ const Dashboard = () => {
                         </div>
                         <div className="card px-5">
                             <div className="card-body">
-                                <i class="bi bi-wallet2 fs-2 fw-bold"></i>
+                                <i class="bi bi-cash-stack fs-2"></i>
                                 <br />
                                 <small>Total Contributions</small>
                                 <p className="fw-bold fs-4">$300.04</p>
@@ -32,7 +32,7 @@ const Dashboard = () => {
                         </div>
                         <div className="card px-5">
                             <div className="card-body">
-                                <i class="bi bi-wallet2 fs-2 fw-bold"></i>
+                                <i class="bi bi-cash fs-2"></i>
                                 <br />
                                 <small>Total Loan</small>
                                 <p className="fw-bold fs-4">$30</p>
@@ -40,7 +40,7 @@ const Dashboard = () => {
                         </div>
                         <div className="card px-5">
                             <div className="card-body">
-                                <i class="bi bi-wallet2 fs-2 fw-bold"></i>
+                                <i class="bi bi-piggy-bank fs-2"></i>
                                 <br />
                                 <small>Total Repaid</small>
                                 <p className="fw-bold fs-4">$20.04</p>
@@ -66,7 +66,7 @@ const Dashboard = () => {
 
                     <div className="transactions-table">
                         <p className="fw-bold fs-3 text-start">Transactions</p>
-                        <table class="table">
+                        <table class="table table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
