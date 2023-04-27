@@ -11,6 +11,8 @@ import CreateGroup from './pages/create_group/CreateGroup'
 import JoinGroup from './pages/join_group/JoinGroup'
 import Group from './pages/group/Group'
 import Profile from './pages/profile/Profile'
+import ApplyLoan from './pages/apply_loan/ApplyLoan'
+import Contribute from './pages/contribute/Contribute'
 
 function App() {
 
@@ -26,6 +28,8 @@ function App() {
         <Route path='/create-group' element={<CreateGroup />}></Route>
         <Route path='/join-group' element={<JoinGroup />}></Route>
         <Route path='/invites' element={<GroupInvites />}></Route>
+        <Route path='/apply-loan/:group_id' exact element={<ApplyLoan />}></Route>
+        <Route path='/contribute/:group_id' exact element={<Contribute />}></Route>
         <Route path='/loans' element={<Loans />}></Route>
         <Route path='/profile' element={<Profile />}></Route>
       </Routes>

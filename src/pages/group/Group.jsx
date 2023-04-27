@@ -1,5 +1,5 @@
 import { React, useState, useContext, useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, Link } from 'react-router-dom'
 import './Group.css'
 import ProjectContext from '../../context/MainContext'
 import axiosClient from '../../components/Axios'
@@ -8,18 +8,13 @@ import Sidebar from '../../components/sidebar/Sidebar'
 
 const Group = () => {
     const { userInfo } = useContext(ProjectContext)
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     // Get Group ID
-    const { id } = useParams();
+    let { id } = useParams();
 
     const [isLoading, setLoading] = useState(true);
     const [groupDetails, setGroupDetails] = useState({})
-    const [loanPurpose, setLoanPurpose] = useState('')
-    const [loanDuration, setLoanDuration] = useState('')
-    const [bankAccountNumber, setBankAccountNumber] = useState('')
-    const [amount, setAmount] = useState(0)
-    const [paymentMode, setPaymentMode] = useState('')
 
     async function getGroupDetails() {
         const response = await axiosClient.get(`/get-group-detail-by-id/${id}`,
@@ -41,43 +36,7 @@ const Group = () => {
         return () => mounted = false;
     }, [])
 
-    const applyLoan = async (e) => {
-        e.preventDefault()
-
-        try {
-            const response = await axiosClient.post('apply-loan', {
-                "loan_purpose": loanPurpose,
-                "loan_duration": loanDuration,
-                "bank_account_number": bankAccountNumber,
-            })
-
-            if (response.status == 200) {
-                navigate('/group')
-            }
-        } catch (error) {
-            console.log(error)
-        }
-
-    }
-
-    const contribute = async (e) => {
-        e.preventDefault()
-
-        try {
-            const response = await axiosClient.post('member-amount-saving/', {
-                "pay_amount": amount,
-                "member_id": userInfo.user_id,
-                "group_id": 2,
-                "payment_mode": paymentMode
-            })
-
-            if (response.status == 200) {
-                navigate('/group')
-            }
-        } catch (error) {
-            console.log(error.response.data)
-        }
-    }
+    
 
     if (isLoading) {
         return (
@@ -127,57 +86,27 @@ const Group = () => {
                                 <button className="btn btn-outline-success" type="button" id="button-addon2">Search</button>
                             </div>
                             <div className='d-flex'>
-                                <button type="button" className="btn btn-warning text-light me-2" data-bs-toggle="modal" data-bs-target="#applyLoan">
-                                    <i className="bi bi-cash-coin fs-4 me-2"></i>
-                                    <span>Apply for a Loan</span>
-                                </button>
-                                <button type="button" className="btn btn-primary text-light me-2" data-bs-toggle="modal" data-bs-target="#repayLoan">
+                                <Link to={`/apply-loan/${groupDetails.id}`}>
+                                    <button type="button" className="btn btn-warning text-light me-2">
+                                        <i className="bi bi-cash-coin fs-4 me-2"></i>
+                                        <span>Apply for a Loan</span>
+                                    </button>
+                                </Link>
+                                <Link to={`/contribute/${groupDetails.id}`}>
+                                    <button type="button" className="btn btn-success text-light me-2">
+                                        <i className="bi bi-cash-coin fs-4 me-2"></i>
+                                        <span>Contribute</span>
+                                    </button>
+                                </Link>
+                                <button type="button" className="btn btn-primary text-light me-2">
                                     <i className="bi bi-cash-coin fs-4 me-2"></i>
                                     <span>Repay Loan</span>
                                 </button>
-                                <button type="button" className="btn btn-success text-light me-2" data-bs-toggle="modal" data-bs-target="#contribute">
-                                    <i className="bi bi-cash-coin fs-4 me-2"></i>
-                                    <span>Contribute</span>
-                                </button>
                             </div>
                         </div>
 
                         {/* Modal */}
-                        <div className=" text-start modal fade" id="applyLoan" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div className="modal-dialog">
-                                <div className="modal-content">
-                                    <div className="modal-header">
-                                        <h1 className="modal-title fs-5" id="staticBackdropLabel">Apply Loan</h1>
-                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div className="modal-body">
-                                        <form onSubmit={applyLoan}>
-                                            <div className="mb-3">
-                                                <label htmlFor="loanPurpose" className="form-label">Loan Purpose</label>
-                                                <input type="text" className="form-control" id="loanPurpose" onChange={(e) => setLoanPurpose(e.target.value)} />
-                                            </div>
-                                            <div className="mb-3">
-                                                <label htmlFor="loanDuration" className="form-label">Loan Duration</label>
-                                                <input type="number" className="form-control" id="loanDuration" onChange={(e) => setLoanDuration(e.target.value)} />
-                                            </div>
-                                            <div className="mb-3">
-                                                <label className="form-label" htmlFor="bankAccount">Bank Account Number</label>
-                                                <input type="text" className="form-control" id="bankAccount" onChange={(e) => setBankAccountNumber(e.target.value)} />
-                                            </div>
-
-                                            <div className="modal-footer">
-                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" className="btn btn-success">Save</button>
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Modal */}
-                        <div className=" text-start modal fade" id="contribute" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        {/* <div className=" text-start modal fade" id="contribute" data-bs-keyboard="false" tabIndex="-1" aria-hidden="true">
                             <div className="modal-dialog">
                                 <div className="modal-content">
                                     <div className="modal-header">
@@ -207,7 +136,7 @@ const Group = () => {
 
                                 </div>
                             </div>
-                        </div>
+                        </div>  */}
 
                         <div className="card groups-list">
                             <p className="fs-3 fw-bold text-start">Group Members</p>
