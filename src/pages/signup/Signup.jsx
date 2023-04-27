@@ -33,9 +33,9 @@ const Signup = () => {
     }
 
     return (
-        <div className="login-page container">
+        <div className="login-page w-75">
             <div className="left-card text-light">
-                <div className="parent-card card bg-dark d-flex justify-content-between flex-column p-5">
+                <div className="parent-card card bg-dark d-flex justify-content-around flex-column p-5">
                     <div>
                         <h1 className="fw-light">
                             Banking That's Always on Your Side
@@ -59,24 +59,19 @@ const Signup = () => {
 
             </div>
 
-            <div className="right-card">
+            <div className="right-card w-75">
                 <div className="login-form">
-                    <img src={lion} alt="" />
+                    <div className='text-center'>
+                        <img src={lion} alt="" />
+                    </div>
 
-                    <div className='mb-4'>
+                    <div className='mb-4 text-center'>
                         <p className="fw-bold fs-3">Sign Up</p>
                         <p className="fw-bold">Community Bank</p>
                     </div>
 
                     <form action="" method="post" onSubmit={register} className='text-start'>
-                        {/* <div className="mb-3">
-                            <label htmlFor="firstName" className="form-label">First Name</label>
-                            <input type="text" className="form-control" placeholder='John' id="firstName" />
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="lastName" className="form-label">Last Name</label>
-                            <input type="text" className="form-control" placeholder='Doe' id="lastName" />
-                        </div> */}
+
                         <div className="mb-3">
                             <label htmlFor="email" className="form-label">Email address</label>
                             <input type="email" className="form-control" onChange={(e) => { setEmail(e.target.value) }} placeholder='example@mail.com' id="email" />
@@ -90,7 +85,7 @@ const Signup = () => {
                     </form>
 
                     <div className='mt-3'>
-                        <p>Already have an account? <a href="/signin">Sign in</a></p>
+                        <p>Already have an account? <a href="/signin" onClick={(e) => { e.preventDefault(); navigate('/signin') }}>Sign in</a></p>
                     </div>
                 </div>
             </div>

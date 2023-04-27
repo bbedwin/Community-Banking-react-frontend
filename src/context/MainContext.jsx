@@ -6,12 +6,15 @@ export default ProjectContext;
 export const ProjectProvider = ({ children }) => {
     const [authToken, setAuthToken] = useState()
     const [userInfo, setUserInfo] = useState()
+    const [groups, setGroups] = useState()
 
     let values = {
         authToken,
         setAuthToken,
         userInfo,
-        setUserInfo
+        groups,
+        setUserInfo,
+        setGroups
     }
 
     return (

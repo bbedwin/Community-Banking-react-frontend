@@ -1,18 +1,21 @@
-import React from 'react'
+import { React, useContext } from 'react'
+import ProjectContext from '../../context/MainContext'
 import './Dashboard.css'
 import Sidebar from '../../components/sidebar/Sidebar'
 import Navbar from '../../components/navbar/Navbar'
 
 const Dashboard = () => {
+    const { authToken, userInfo } = useContext(ProjectContext)
+    console.log(userInfo)
     return (
         <div className='d-flex'>
             <Sidebar />
-            <div className='stats container'>
+            <div className='dashboard-stats'>
                 <div className="navigation w-100 pb-2">
                     <Navbar title={'Dashboard'} />
                 </div>
 
-                <div className="content bg-light pt-3">
+                <div className="dashboard-content bg-light pt-3">
                     <div className="cards d-flex justify-content-around">
                         <div className="card px-5">
                             <div className="card-body">

@@ -18,13 +18,13 @@ const Loans = () => {
                     </div>
 
                     <div>
-                        <div class="input-group my-5">
-                            <input type="search" name='group-name' class="form-control" placeholder="group name" />
-                            <button class="btn btn-outline-success" type="button" id="button-addon2">Search</button>
+                        <div className="input-group my-5">
+                            <input type="search" name='group-name' className="form-control" placeholder="group name" />
+                            <button className="btn btn-outline-success" type="button" id="button-addon2">Search</button>
                         </div>
 
                         <div className="card groups-list">
-                            <table class="table table-hover">
+                            <table className="table table-hover">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>

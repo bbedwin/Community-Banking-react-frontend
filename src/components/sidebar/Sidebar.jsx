@@ -19,36 +19,25 @@ const Sidebar = () => {
                     <div className='navlinks text-light'>
                         <ul className='text-start'>
                             <li>
-                                <i className="bi bi-bar-chart fs-4 me-2"></i>
-                                <a href="/dashboard">
-                                    Dashboard
-                                </a>
+                                <i className="bi bi-bar-chart fs-4 me-2">
+                                    <button type='button' className="btn btn-transparent text-light" onClick={(e) => { e.preventDefault(); navigate('/dashboard') }}>
+                                        Dashboard
+                                    </button>
+                                </i>
+                                
                             </li>
                             <li>
                                 <i className="bi bi-people fs-4 me-2"></i>
-                                <a href="/groups">
+                                <button type='button' className="btn btn-transparent text-light" onClick={(e) => { e.preventDefault(); navigate('/groups') }}>
                                     Groups
-                                </a>
+                                </button>
                             </li>
                             <li>
-                                <i className="bi bi-person fs-4 me-2"></i>
-                                <a href="/loans">
+                                <i className="bi bi-cash-stack fs-4 me-2"></i>
+                                <button type='button' className="btn btn-transparent text-light" onClick={(e) => { e.preventDefault(); navigate('/loans') }}>
                                     Loans
-                                </a>
+                                </button>
                             </li>
-                            <li>
-                                <i className="bi bi-person fs-4 me-2"></i>
-                                <a href="">
-                                    Trustees
-                                </a>
-                            </li>
-                            <li>
-                                <i className="bi bi-person fs-4 me-2"></i>
-                                <a href="">
-                                    Members
-                                </a>
-                            </li>
-                            
                         </ul>
                     </div>
                 </div>

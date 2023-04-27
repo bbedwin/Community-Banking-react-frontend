@@ -25,15 +25,17 @@ const Login = () => {
                     }
                 })
 
-            console.log(response.data)
-
             setAuthToken(response.data.access)
 
-            const userInfo = jwt_decode(response.data.access).userInfo
+            localStorage.setItem("authToken", response.data.access);
+
+            const userInfo = jwt_decode(response.data.access)
 
             setUserInfo(userInfo)
 
-            navigate('/dashboard')
+            console.log(userInfo)
+
+            navigate('/')
 
         } catch (error) {
             console.log(error)
@@ -41,9 +43,9 @@ const Login = () => {
     }
 
     return (
-        <div className="login-page container">
+        <div className="login-page w-75">
             <div className="left-card text-light">
-                <div className="parent-card card bg-dark d-flex justify-content-between flex-column p-5">
+                <div className="parent-card card bg-dark d-flex justify-content-around flex-column p-5">
                     <div>
                         <h1 className="fw-light">
                             Banking That's Always on Your Side
@@ -67,11 +69,13 @@ const Login = () => {
 
             </div>
 
-            <div className="right-card">
+            <div className="right-card w-75">
                 <div className="login-form">
-                    <img src={lion} alt="" />
+                    <div className='text-center'>
+                        <img src={lion} alt="" />
+                    </div>
 
-                    <div className='mb-4'>
+                    <div className='mb-4 text-center'>
                         <p className="fw-bold fs-3">Sign In</p>
                         <p className="fw-bold">Community Bank</p>
                     </div>
@@ -91,7 +95,7 @@ const Login = () => {
 
                     <div className='mt-3'>
                         <p className='mb-3'><a href="">Forgot password?</a></p>
-                        <p>Don't have an account? <a href="/signup">Sign up</a></p>
+                        <p>Don't have an account? <a href="/signup" onClick={(e) => {e.preventDefault(); navigate('/signup')}} >Sign up</a></p>
                     </div>
                 </div>
             </div>
