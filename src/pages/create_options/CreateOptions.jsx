@@ -5,14 +5,16 @@ import axiosClient from '../../components/Axios'
 import './CreateOptions.css'
 import Navbar from '../../components/navbar/Navbar'
 import NavigationBar from '../../components/NavigationBar/NavigationBar'
-import family from '../../assets/family.jpg'
+import family from '../../assets/family-min.webp'
+import hands from '../../assets/hands-min.webp'
+import invest from '../../assets/invest-min.webp'
 
 const CreateOptions = () => {
     const { authToken, userInfo } = useContext(ProjectContext)
     const navigate = useNavigate()
 
     return (
-        <div className='options-bg'>
+        <div className='options-bg min-vh-100'>
             <div className='create-options-content'>
                 <div className="pb-2">
                     <NavigationBar />
@@ -26,9 +28,9 @@ const CreateOptions = () => {
                         </p>
                     </div>
 
-                    <div className="buttons d-flex justify-content-around mt-4">
+                    <div className="buttons d-md-flex justify-content-evenly mt-4">
                         <div>
-                            <div className="card p-0 bg-dark text-light border-0" style={{ width: "20rem" }}>
+                            <div className="card p-0 mx-5 mb-3 bg-dark text-light border-0" style={{ width: "20rem" }}>
                                 <img src={family} className="card-img-top img-fluid" alt="family" />
                                 <div className="card-body">
                                     <h5 className="card-title">Create a Group</h5>
@@ -39,8 +41,8 @@ const CreateOptions = () => {
                         </div>
 
                         <div>
-                            <div className="card p-0 mx-5 bg-dark text-light border-0" style={{ width: "20rem" }}>
-                                <img src={family} className="card-img-top img-fluid" alt="family" />
+                            <div className="card p-0 mx-5 mb-3 bg-dark text-light border-0" style={{ width: "20rem" }}>
+                                <img src={hands} className="card-img-top img-fluid" alt="family" />
                                 <div className="card-body">
                                     <h5 className="card-title">Join a group</h5>
                                     <p className="card-text">Join an already existing group using an invite code and start saving</p>
@@ -50,8 +52,8 @@ const CreateOptions = () => {
                         </div>
 
                         <div>
-                            <div className="card p-0 mx-5 bg-dark text-light border-0" style={{ width: "20rem" }}>
-                                <img src={family} className="card-img-top img-fluid" alt="family" />
+                            <div className="card p-0 mx-5 mb-3 bg-dark text-light border-0" style={{ width: "20rem" }}>
+                                <img src={invest} className="card-img-top img-fluid" alt="family" />
                                 <div className="card-body">
                                     <h5 className="card-title">Become an investor</h5>
                                     <p className="card-text">Invest in a group and start reaping benefits</p>

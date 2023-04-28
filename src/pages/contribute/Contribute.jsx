@@ -94,7 +94,7 @@ const Contribute = () => {
                         </ul>
                     </div>
 
-                    <div className="card" style={{ width: "30rem" }}>
+                    <div className="card contribute-form" style={{ width: "30rem" }}>
                         <h3 className="text-center card-header">Contribute to group</h3>
                         <div className="card-body">
                             <form onSubmit={contribute}>

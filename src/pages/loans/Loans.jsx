@@ -1,12 +1,10 @@
 import React from 'react'
 import './Loans.css'
 import Navbar from '../../components/navbar/Navbar'
-import Sidebar from '../../components/sidebar/Sidebar'
 
 const Loans = () => {
     return (
         <div className='d-flex'>
-            <Sidebar />
             <div className='stats container'>
                 <div className="navigation w-100 pb-2">
                     <Navbar title={'Loans'} />

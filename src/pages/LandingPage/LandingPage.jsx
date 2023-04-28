@@ -13,7 +13,7 @@ const LandingPage = () => {
         <NavigationBar />
       </div>
 
-      <div className='d-md-flex justify-content-md-between align-items-center container mt-5'>
+      <div className='hero-content d-md-flex justify-content-md-between align-items-center container mt-5'>
         <div className="hero-text text-light">
           <p className="fs-2 fw-bold">
             Community Banking

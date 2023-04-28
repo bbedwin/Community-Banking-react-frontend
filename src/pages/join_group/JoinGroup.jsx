@@ -1,5 +1,6 @@
 import { React, useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import ProjectContext from '../../context/MainContext'
 import axiosClient from '../../components/Axios'
 import NavigationBar from '../../components/NavigationBar/NavigationBar'
@@ -26,10 +27,12 @@ const JoinGroup = () => {
                     }
                 }
             )
-
+            
+            toast.warn("Successfully Joined a group")
             navigate(`/group/${response.data.data.id}`)
 
         } catch (error) {
+            toast.warn(error.response.data.message)
             console.log(error)
         }
     }
@@ -49,7 +52,7 @@ const JoinGroup = () => {
                         </p>
                     </div>
                 </div>
-                <div className="card mx-auto" style={{ width: "35rem" }}>
+                <div className="card mx-auto join-group-form" style={{ width: "35rem" }}>
                     <h3 className="card-header">Join a Group</h3>
                     <div className="card-body">
                         <form onSubmit={joinGroup}>

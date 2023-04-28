@@ -2,3 +2,8 @@
     min-width: 100vw;
     min-height: 100vh;
 }
+
+.contribute-form {
+    width: auto !important;
+    margin: auto;
+}

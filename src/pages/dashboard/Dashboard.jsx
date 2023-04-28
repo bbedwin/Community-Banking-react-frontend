@@ -1,15 +1,46 @@
-import { React, useContext } from 'react'
+import { React, useContext, useState, useEffect } from 'react'
 import ProjectContext from '../../context/MainContext'
 import './Dashboard.module.css'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import axiosClient from '../../components/Axios'
 import NavigationBar from '../../components/NavigationBar/NavigationBar'
 import Colors from '../../components/colors/Colors'
 
 const Dashboard = () => {
     const { authToken, userInfo } = useContext(ProjectContext)
+    const [transactions, setTransactions] = useState([])
+    const [isLoading, setLoading] = useState(true)
+
+    let initialValue = 0
     console.log(userInfo)
+
+    async function getMemberTransactions() {
+        try {
+            const response = await axiosClient.get(`/get-member-saved-amount/?user_id=${userInfo.user_id}`,
+                {
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }
+            )
+
+            console.log(response.data)
+            setTransactions(response.data)
+            setLoading(false);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        let mounted = true;
+        getMemberTransactions()
+        return () => mounted = false;
+    }, [])
+
     return (
-        <div>
+        <div className='min-vh-100'>
             <div className="navigation w-100 pb-2">
                 <NavigationBar />
             </div>
@@ -19,11 +50,11 @@ const Dashboard = () => {
                 <div>
                     <span className="fs-2 fw-light">Welcome back <span className="fw-bold">Member</span>,</span>
                     <br />
-                    <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repudiandae, corporis.</span>
+                    <span>Here's a summary of your activities in the last few days.</span>
                 </div>
 
-                <div className="cards d-md-flex justify-content-between mt-5">
-                    <div className="card text-center" style={{backgroundColor: Colors.SECONDARY, width: "15rem"}}>
+                <div className="cards d-md-flex justify-content-md-between align-items-center mt-5">
+                    <div className="card text-center mx-auto mb-3" style={{backgroundColor: Colors.SECONDARY, width: "15rem"}}>
                         <Link to={"/groups"}>
                             <div className="card-body">
                                 <i className="bi bi-people fs-2"></i>
@@ -33,28 +64,32 @@ const Dashboard = () => {
                             </div>
                         </Link>
                     </div>
-                    <div className="card text-center" style={{backgroundColor: Colors.SECONDARY, width: "15rem"}}>
+                    <div className="card text-center mx-auto w-md-100 mb-3" style={{backgroundColor: Colors.SECONDARY, width: "15rem"}}>
                         <div className="card-body">
                             <i className="bi bi-cash-stack fs-2"></i>
                             <br />
                             <span>Total Contributions</span>
-                            <p className="fw-bold fs-4">$300.04</p>
+                            <p className="fw-bold fs-4">KES {
+                                transactions.reduce((accumulator, curValue) => {
+                                    return accumulator + curValue.pay_amount
+                                }, initialValue)
+                            }</p>
                         </div>
                     </div>
-                    <div className="card text-center" style={{backgroundColor: Colors.SECONDARY, width: "15rem"}}>
+                    <div className="card text-center mx-auto w-md-100 mb-3" style={{backgroundColor: Colors.SECONDARY, width: "15rem"}}>
                         <div className="card-body">
                             <i className="bi bi-cash fs-2"></i>
                             <br />
                             <span>Total Loan</span>
-                            <p className="fw-bold fs-4">$30</p>
+                            <p className="fw-bold fs-4">KES 0</p>
                         </div>
                     </div>
-                    <div className="card text-center" style={{backgroundColor: Colors.SECONDARY, width: "15rem"}}>
+                    <div className="card text-center mx-auto w-md-100" style={{backgroundColor: Colors.SECONDARY, width: "15rem"}}>
                         <div className="card-body">
                             <i className="bi bi-piggy-bank fs-2"></i>
                             <br />
                             <span>Total Repaid</span>
-                            <p className="fw-bold fs-4">$20.04</p>
+                            <p className="fw-bold fs-4">KES 0</p>
                         </div>
                     </div>
                 </div>
@@ -66,60 +101,27 @@ const Dashboard = () => {
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
+                                    <th scope="col">Group</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">Transaction ID</th>
+                                    <th scope="col">Date</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry the Bird</td>
-                                    <td>@twitter</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry the Bird</td>
-                                    <td>@twitter</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry the Bird</td>
-                                    <td>@twitter</td>
-                                    <td>@fat</td>
-                                </tr>
+                                {
+                                    transactions.slice(0,10).map((transaction, i) => {
+                                        return (
+                                            <tr key={i + 1}>
+                                                <th scope="row">{i+1}</th>
+                                                <td>{transaction.group_id}</td>
+                                                <td>{transaction.pay_amount}</td>
+                                                <td>{transaction.transaction_id}</td>
+                                                <td>{transaction.created_at.slice(0,10)}</td>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                                
                             </tbody>
                         </table>
                     </div>

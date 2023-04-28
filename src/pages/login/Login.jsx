@@ -5,7 +5,6 @@ import ProjectContext from '../../context/MainContext'
 import axiosClient from '../../components/Axios'
 import { toast } from 'react-toastify'
 import './Login.css'
-import lion from '../../assets/11334.png'
 
 const Login = () => {
     const navigate = useNavigate()
@@ -56,7 +55,7 @@ const Login = () => {
                         <p className="fw-bold">Community Bank</p>
                     </div>
 
-                    <form action="" method="post" onSubmit={signIn} className='text-start' style={{ width: "35rem", height: "auto" }}>
+                    <form action="" method="post" onSubmit={signIn} className='sign-in-form text-start' style={{ width: "35rem", height: "auto" }}>
                         <div className="mb-3">
                             <label htmlFor="email" className="form-label">Email address</label>
                             <input type="email" className="form-control" onChange={(e) => { setEmail(e.target.value) }} placeholder='example@mail.com' id="email" />

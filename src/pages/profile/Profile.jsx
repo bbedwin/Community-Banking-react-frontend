@@ -1,6 +1,7 @@
 import { React, useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ProjectContext from '../../context/MainContext'
+import { toast } from 'react-toastify'
 import axiosClient from '../../components/Axios'
 import Navbar from '../../components/navbar/Navbar'
 
@@ -34,15 +35,19 @@ const Profile = () => {
                     }
                 }
             )
-
-            navigate(-1)
+            
+            if (response.status == 201) {
+                toast.success("Profile updated successfully")
+                navigate(-1)
+            }
         } catch (error) {
+            toast.warn(error.response.data)
             console.log(error)
         }
     }
 
     return (
-        <div className='profile'>
+        <div className='profile min-vh-100'>
             <div className='content'>
                 <div className="pb-2">
                     <Navbar title={'Profile'} />

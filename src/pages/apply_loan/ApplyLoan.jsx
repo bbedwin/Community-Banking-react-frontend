@@ -68,7 +68,7 @@ const ApplyLoan = () => {
                                 <li>Loan Repayments: Monthly</li>
                             </ul>
                     </div>
-                    <div className="card" style={{ width: "30rem" }}>
+                    <div className="card apply-loan-form" style={{ width: "30rem" }}>
                         <h3 className="text-center card-header">Apply Loan</h3>
                         <div className="card-body">
                             <form onSubmit={applyLoan}>

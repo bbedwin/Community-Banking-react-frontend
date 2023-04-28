@@ -1,10 +1,10 @@
 import { React, useState, useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ProjectContext from '../../context/MainContext'
+import { toast } from 'react-toastify'
 import axiosClient from '../../components/Axios'
 import './Groups.css'
 import NavigationBar from '../../components/NavigationBar/NavigationBar'
-import Sidebar from '../../components/sidebar/Sidebar'
 
 const Groups = () => {
     const { userInfo, authToken, setGroups, groups } = useContext(ProjectContext)
@@ -28,6 +28,8 @@ const Groups = () => {
             }
 
         } catch (error) {
+            toast.warn(error.response.data.error)
+            navigate("/")
             console.log(error)
         }
     }
@@ -47,7 +49,7 @@ const Groups = () => {
             <div className='d-flex min-vh-100 flex-column'>
                 <NavigationBar />
 
-                <div className='container'>
+                <div className='container min-vh-100'>
                     <div className="d-flex justify-content-between align-items-center">
                         <p className="fw-bold text-light fs-2">{groups.length} Group(s)</p>
                         <div className="input-group my-5 w-50">
@@ -56,7 +58,7 @@ const Groups = () => {
                         </div>
                     </div>
 
-                    <div>
+                    <div className='min-vh-100'>
                         <div className="card groups-list">
                             <table className="table table-hover">
                                 <thead>

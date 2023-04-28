@@ -7,7 +7,6 @@ import Signup from './pages/signup/Signup'
 import Dashboard from './pages/dashboard/Dashboard'
 import CreateOptions from './pages/create_options/CreateOptions'
 import Groups from './pages/groups/Groups'
-import GroupInvites from './pages/group-invites/GroupInvites'
 import Loans from './pages/loans/Loans'
 import CreateGroup from './pages/create_group/CreateGroup'
 import JoinGroup from './pages/join_group/JoinGroup'
@@ -23,7 +22,7 @@ function App() {
     <div className="App">
       <ToastContainer
         position="top-center"
-        autoClose={5000}
+        autoClose={3000}
         hideProgressBar={false}
         closeOnClick={true}
         pauseOnHover={true}
@@ -41,7 +40,6 @@ function App() {
         <Route path='/dashboard' element={<Dashboard />}></Route>
         <Route path='/create-group' element={<CreateGroup />}></Route>
         <Route path='/join-group' element={<JoinGroup />}></Route>
-        <Route path='/invites' element={<GroupInvites />}></Route>
         <Route path='/apply-loan/:group_id' exact element={<ApplyLoan />}></Route>
         <Route path='/contribute/:group_id' exact element={<Contribute />}></Route>
         <Route path='/loans' element={<Loans />}></Route>

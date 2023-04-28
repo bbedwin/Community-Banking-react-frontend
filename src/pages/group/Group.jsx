@@ -4,7 +4,6 @@ import './Group.css'
 import ProjectContext from '../../context/MainContext'
 import axiosClient from '../../components/Axios'
 import NavigationBar from '../../components/NavigationBar/NavigationBar'
-import Sidebar from '../../components/sidebar/Sidebar'
 import Colors from '../../components/colors/Colors'
 
 const Group = () => {
@@ -16,6 +15,7 @@ const Group = () => {
 
     const [isLoading, setLoading] = useState(true);
     const [groupDetails, setGroupDetails] = useState({})
+    const [groupTotal, setGroupTotal] = useState(0)
 
     async function getGroupDetails() {
         const response = await axiosClient.get(`/get-group-detail-by-id/${id}`,
@@ -31,9 +31,24 @@ const Group = () => {
         setLoading(false);
     }
 
+    async function getGroupTotal() {
+        const response = await axiosClient.get(`/get-group-collection?group_id=${id}`,
+            {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }
+        )
+
+        console.log(response.data)
+        setGroupTotal(response.data.available_funds)
+        setLoading(false);
+    }
+
     useEffect(() => {
         let mounted = true;
         getGroupDetails()
+        getGroupTotal()
         return () => mounted = false;
     }, [])
 
@@ -49,7 +64,7 @@ const Group = () => {
                 <NavigationBar />
 
                 <div className="container mt-3">
-                    <div className="card flex-wrap px-4">
+                    <div className="card flex-wrap px-4 mb-3">
                         <div className="group-details-card card-body">
                             <div>
                                 <span className='fs-4 fw-bold'>Group Name</span> <br />
@@ -66,15 +81,15 @@ const Group = () => {
 
                             <div>
                                 <span className='fs-4 fw-bold'>Group Admin</span> <br />
-                                <small className='fs-5 fw-bold'>{groupDetails.group_admin.email}</small>
+                                <small className='fs-5 fw-bold'>asdasdasd</small>
                             </div>
                             <div>
                                 <span className='fs-4 fw-bold'>Number of Members</span> <br />
-                                <small className='fs-5 fw-bold'>{groupDetails.group_trustees.length}</small>
+                                <small className='fs-5 fw-bold'>{groupDetails.group_trustees.length | 0}</small>
                             </div>
                             <div>
                                 <span className='fs-4 fw-bold'>Total Contributions</span> <br />
-                                <small className='fs-5 fw-bold'>$200, 378</small>
+                                <small className='fs-5 fw-bold'>KES {groupTotal}</small>
                             </div>
                         </div>
                     </div>

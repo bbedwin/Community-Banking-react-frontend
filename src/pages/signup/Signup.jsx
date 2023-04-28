@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import axiosClient from '../../components/Axios'
 import { toast } from 'react-toastify'
 import Colors from '../../components/colors/Colors'
+import './Signup.css'
 
 
 const Signup = () => {
@@ -43,7 +44,7 @@ const Signup = () => {
                         <p className="fw-bold mb-5">Community Bank</p>
                     </div>
 
-                    <form action="" method="post" onSubmit={register} className='text-start' style={{ width: "35rem", height: "auto" }}>
+                    <form action="" method="post" onSubmit={register} className='sign-up-form text-start' style={{ width: "35rem", height: "auto" }}>
 
                         <div className="mb-3">
                             <label htmlFor="email" className="form-label">Email address</label>

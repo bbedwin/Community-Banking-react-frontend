@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import ProjectContext from '../../context/MainContext'
 import axiosClient from '../../components/Axios'
 import NavigationBar from '../../components/NavigationBar/NavigationBar'
+import { toast } from 'react-toastify'
 import './CreateGroup.css'
 
 const CreateGroup = () => {
@@ -53,11 +54,18 @@ const CreateGroup = () => {
                 }
             )
 
+            if (response.status == 201) {
+                toast.success("Group created successfully")
+                navigate('/groups')
+            }
+
         } catch (error) {
             if (error.response.data.message == "Please complete your profile to proceed") {
+                toast.warn("Please complete your profile to proceed")
                 navigate('/profile')
             }
-            console.log(error.response.data.message)
+            toast.warn(error.response.data)
+            console.log(error)
         }
     }
 
@@ -77,14 +85,15 @@ const CreateGroup = () => {
                     </div>
                 </div>
 
-                <div className="card mx-auto" style={{ width: "35rem" }}>
+                <div className="card mx-auto create-group-form" style={{ width: "35rem" }}>
                     <h3 className='card-header text-center'>Group Form</h3>
                     <div className="card-body">
-                        <form onSubmit={createGroup}>
+                        <form onSubmit={createGroup} className=''>
                             <div className="mb-3">
                                 <label htmlFor="groupType" className="form-label">Group Type</label>
                                 <select className="form-select" id='groupType' name='groupType'
-                                    onChange={(e) => { setGroupType(e.target.value) }}>
+                                    onChange={(e) => { setGroupType(e.target.value) }} required={true}>
+                                    <option selected value={""}>Open to select</option>
                                     {groupTypesChoices.map((type, i) => {
                                         return (
                                             <option key={i} value={type.id}>{type.name}</option>
