@@ -4,6 +4,7 @@ import ProjectContext from '../../context/MainContext'
 import axiosClient from '../../components/Axios'
 import './CreateOptions.css'
 import Navbar from '../../components/navbar/Navbar'
+import NavigationBar from '../../components/NavigationBar/NavigationBar'
 import family from '../../assets/family.jpg'
 
 const CreateOptions = () => {
@@ -14,7 +15,7 @@ const CreateOptions = () => {
         <div className='options-bg'>
             <div className='create-options-content'>
                 <div className="pb-2">
-                    <Navbar title={'Choose'} />
+                    <NavigationBar />
                 </div>
 
                 <div className='bg-div d-flex flex-column justify-content-center align-items-center pt-2'>

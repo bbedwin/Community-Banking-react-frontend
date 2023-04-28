@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import ProjectContext from '../../context/MainContext'
 import axiosClient from '../../components/Axios'
 import './Groups.css'
-import Navbar from '../../components/navbar/Navbar'
+import NavigationBar from '../../components/NavigationBar/NavigationBar'
 import Sidebar from '../../components/sidebar/Sidebar'
 
 const Groups = () => {
@@ -44,52 +44,46 @@ const Groups = () => {
         )
     } else {
         return (
-            <div className='d-flex'>
-                <Sidebar />
-                <div className='groups-stats'>
-                    <div className="navigation w-100 pb-2">
-                        <Navbar title={'Groups'} />
+            <div className='d-flex min-vh-100 flex-column'>
+                <NavigationBar />
+
+                <div className='container'>
+                    <div className="d-flex justify-content-between align-items-center">
+                        <p className="fw-bold text-light fs-2">{groups.length} Group(s)</p>
+                        <div className="input-group my-5 w-50">
+                            <input type="search" name='group-name' className="form-control" placeholder="group name" />
+                            <button className="btn btn-light" type="button" id="button-addon2">Search</button>
+                        </div>
                     </div>
 
                     <div>
-                        <div className="d-flex justify-content-between align-items-center">
-                            <p className="fw-bold fs-2">{groups.length} Group(s)</p>
-                            <div className="input-group my-5 w-50 mx-auto">
-                                <input type="search" name='group-name' className="form-control" placeholder="group name" />
-                                <button className="btn btn-outline-success" type="button" id="button-addon2">Search</button>
-                            </div>
+                        <div className="card groups-list">
+                            <table className="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Group Name</th>
+                                        <th scope="col">Group Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {groups.map((group, i) => {
+                                        return (
+                                            <tr key={i + 1}>
+                                                <th scope="row">{i + 1}</th>
+                                                <td>
+                                                    <a href="/group/" className='text-primary' onClick={(e) => { e.preventDefault(); navigate(`/group/${group.id}`) }}>
+                                                        {group.group_name}
+                                                    </a>
+                                                </td>
+                                                <td>{group.group_description}</td>
+                                            </tr>
+                                        )
+                                    })}
+
+                                </tbody>
+                            </table>
                         </div>
-
-                        <div>
-                            <div className="card groups-list">
-                                <table className="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Group Name</th>
-                                            <th scope="col">Group Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {groups.map((group, i) => {
-                                            return (
-                                                <tr key={i + 1}>
-                                                    <th scope="row">{i + 1}</th>
-                                                    <td>
-                                                        <a href="/group/" onClick={(e) => { e.preventDefault(); navigate(`/group/${group.id}`) }}>
-                                                            {group.group_name}
-                                                        </a>
-                                                    </td>
-                                                    <td>{group.group_description}</td>
-                                                </tr>
-                                            )
-                                        })}
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>

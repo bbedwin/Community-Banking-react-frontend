@@ -1,5 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import Login from './pages/login/Login'
 import Signup from './pages/signup/Signup'
 import Dashboard from './pages/dashboard/Dashboard'
@@ -13,16 +15,28 @@ import Group from './pages/group/Group'
 import Profile from './pages/profile/Profile'
 import ApplyLoan from './pages/apply_loan/ApplyLoan'
 import Contribute from './pages/contribute/Contribute'
+import LandingPage from './pages/LandingPage/LandingPage'
 
 function App() {
 
   return (
     <div className="App">
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        closeOnClick={true}
+        pauseOnHover={true}
+        draggable={true}
+        progress={undefined}
+        theme="light"
+      />
       <Routes>
         <Route path='/signin' element={<Login />}></Route>
         <Route path='/signup' element={<Signup />}></Route>
         <Route path='/' element={<CreateOptions />}></Route>
         <Route path='/groups' element={<Groups />}></Route>
+        <Route path='/home' element={<LandingPage />} />
         <Route path='/group/:id' element={<Group />}></Route>
         <Route path='/dashboard' element={<Dashboard />}></Route>
         <Route path='/create-group' element={<CreateGroup />}></Route>

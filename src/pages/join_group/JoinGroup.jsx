@@ -2,7 +2,7 @@ import { React, useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ProjectContext from '../../context/MainContext'
 import axiosClient from '../../components/Axios'
-import Navbar from '../../components/navbar/Navbar'
+import NavigationBar from '../../components/NavigationBar/NavigationBar'
 import './JoinGroup.css'
 
 const JoinGroup = () => {
@@ -38,10 +38,10 @@ const JoinGroup = () => {
         <div className='join-group-bg'>
             <div className='content'>
                 <div className="pb-2">
-                    <Navbar title={'Join a Group'} />
+                    <NavigationBar />
                 </div>
 
-                <div className='bg-div d-flex flex-column justify-content-center align-items-center pt-2'>
+                <div className='bg-div d-flex flex-column justify-content-center text-light align-items-center pt-2'>
                     <div className='fs-4 text-center w-100'>
                         <p className='fs-2 fw-bold'>Join Group</p>
                         <p>
