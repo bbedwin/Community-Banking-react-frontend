@@ -3,7 +3,9 @@
     min-height: 100vh;
 }
 
-.create-group-form {
-    width: auto !important;
-    margin: auto;
+@media only screen and (max-width: 768px) {
+    .create-group-form {
+        width: auto !important;
+        margin: auto;
+    }
 }

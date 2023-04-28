@@ -15,28 +15,33 @@ const NavigationBar = () => {
                     </ul>
 
                     <ul className='navbar-nav mb-2'>
-                        <Link to={"/home"}>
-                            <li class="nav-item">
+                        <Link to={"/"}>
+                            <li class="nav-item me-4 fw-bold">
                                 <a class="nav-link" href="#" style={{ color: Colors.WHITE }}>Home</a>
                             </li>
                         </Link>
                         <Link to={"/dashboard"}>
-                            <li class="nav-item me-4">
+                            <li class="nav-item me-4 fw-bold">
                                 <a class="nav-link" href="#" style={{ color: Colors.WHITE }}>Dashboard</a>
                             </li>
                         </Link>
+                        <Link to={"/home"}>
+                            <li class="nav-item me-4 fw-bold">
+                                <a class="nav-link" href="#" style={{ color: Colors.WHITE }}>Create</a>
+                            </li>
+                        </Link>
                         <Link to={"/groups"}>
-                            <li class="nav-item me-4">
+                            <li class="nav-item me-4 fw-bold">
                                 <a class="nav-link" href="#" style={{ color: Colors.WHITE }}>Groups</a>
                             </li>
                         </Link>
                         <Link to={"/signin"}>
-                            <li class="nav-item me-4">
+                            <li class="nav-item me-4 fw-bold">
                                 <a class="nav-link btn" href="" style={{ color: Colors.WHITE, borderColor: Colors.SECONDARY }}>Sign in</a>
                             </li>
                         </Link>
                         <Link to={"/signup"}>
-                            <li class="nav-item me-4">
+                            <li class="nav-item me-4 fw-bold">
                                 <a class="nav-link btn" href="" style={{ color: Colors.WHITE, backgroundColor: Colors.BG }}>Sign up</a>
                             </li>
                         </Link>

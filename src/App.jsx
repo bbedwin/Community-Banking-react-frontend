@@ -33,9 +33,9 @@ function App() {
       <Routes>
         <Route path='/signin' element={<Login />}></Route>
         <Route path='/signup' element={<Signup />}></Route>
-        <Route path='/' element={<CreateOptions />}></Route>
+        <Route path='/' element={<LandingPage />}></Route>
         <Route path='/groups' element={<Groups />}></Route>
-        <Route path='/home' element={<LandingPage />} />
+        <Route path='/home' element={<CreateOptions />} />
         <Route path='/group/:id' element={<Group />}></Route>
         <Route path='/dashboard' element={<Dashboard />}></Route>
         <Route path='/create-group' element={<CreateGroup />}></Route>

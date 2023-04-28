@@ -3,7 +3,9 @@
     min-height: 100vh;
 }
 
-.contribute-form {
-    width: auto !important;
-    margin: auto;
+@media only screen and (max-width: 768px) {
+    .contribute-form {
+        width: auto !important;
+        margin: auto;
+    }
 }

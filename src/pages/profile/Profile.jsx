@@ -38,7 +38,7 @@ const Profile = () => {
             
             if (response.status == 201) {
                 toast.success("Profile updated successfully")
-                navigate(-1)
+                navigate("/home")
             }
         } catch (error) {
             toast.warn(error.response.data)
