@@ -1,4 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
+import ProtectedRoutes from './components/ProtectedRoutes';
+import PersistLogin from './components/PersistLogin';
 import './App.css'
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -34,16 +36,22 @@ function App() {
         <Route path='/signin' element={<Login />}></Route>
         <Route path='/signup' element={<Signup />}></Route>
         <Route path='/' element={<LandingPage />}></Route>
-        <Route path='/groups' element={<Groups />}></Route>
-        <Route path='/home' element={<CreateOptions />} />
-        <Route path='/group/:id' element={<Group />}></Route>
-        <Route path='/dashboard' element={<Dashboard />}></Route>
-        <Route path='/create-group' element={<CreateGroup />}></Route>
-        <Route path='/join-group' element={<JoinGroup />}></Route>
-        <Route path='/apply-loan/:group_id' exact element={<ApplyLoan />}></Route>
-        <Route path='/contribute/:group_id' exact element={<Contribute />}></Route>
-        <Route path='/loans' element={<Loans />}></Route>
-        <Route path='/profile' element={<Profile />}></Route>
+
+
+        <Route element={<PersistLogin />}>
+          <Route element={<ProtectedRoutes />}>
+            <Route path='/groups' element={<Groups />}></Route>
+            <Route path='/home' element={<CreateOptions />} />
+            <Route path='/group/:id' element={<Group />}></Route>
+            <Route path='/dashboard' element={<Dashboard />}></Route>
+            <Route path='/create-group' element={<CreateGroup />}></Route>
+            <Route path='/join-group' element={<JoinGroup />}></Route>
+            <Route path='/apply-loan/:group_id' exact element={<ApplyLoan />}></Route>
+            <Route path='/contribute/:group_id' exact element={<Contribute />}></Route>
+            <Route path='/loans' element={<Loans />}></Route>
+            <Route path='/profile' element={<Profile />}></Route>
+          </Route>
+        </Route>
       </Routes>
     </div>
   )

@@ -6,7 +6,13 @@ export default ProjectContext;
 export const ProjectProvider = ({ children }) => {
     const [authToken, setAuthToken] = useState()
     const [userInfo, setUserInfo] = useState()
-    const [groups, setGroups] = useState()
+    const [groups, setGroups] = useState([])
+
+    const Logout = () => {
+        setAuthToken()
+        setUserInfo()
+        localStorage.setItem('status', '0')
+    }
 
     let values = {
         authToken,
@@ -14,7 +20,8 @@ export const ProjectProvider = ({ children }) => {
         userInfo,
         groups,
         setUserInfo,
-        setGroups
+        setGroups, 
+        Logout
     }
 
     return (

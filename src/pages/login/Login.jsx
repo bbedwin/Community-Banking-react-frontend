@@ -28,6 +28,8 @@ const Login = () => {
             setAuthToken(response.data.access)
 
             localStorage.setItem("authToken", response.data.access);
+            localStorage.setItem("refreshToken", response.data.refresh);
+            localStorage.setItem('status', '1')
 
             const userInfo = jwt_decode(response.data.access)
 

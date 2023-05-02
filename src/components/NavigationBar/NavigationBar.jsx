@@ -1,50 +1,56 @@
-import React from 'react'
+import { React, useContext } from 'react'
+import ProjectContext from '../../context/MainContext'
 import { Link } from 'react-router-dom'
 import Colors from '../colors/Colors'
 
 const NavigationBar = () => {
+    const { Logout } = useContext(ProjectContext)
     return (
-        <nav class="navbar navbar-expand-lg" style={{ backgroundColor: Colors.SECONDARY }}>
-            <div class="container-fluid">
-                <a class="navbar-brand fw-bold" href="#" style={{ color: Colors.WHITE }}>Community Banking</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+        <nav className="navbar navbar-expand-lg" style={{ backgroundColor: Colors.SECONDARY }}>
+            <div className="container-fluid">
+                <a className="navbar-brand fw-bold" href="#" style={{ color: Colors.WHITE }}>Community Banking</a>
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     </ul>
 
                     <ul className='navbar-nav mb-2'>
                         <Link to={"/"}>
-                            <li class="nav-item me-4 fw-bold">
-                                <a class="nav-link" href="#" style={{ color: Colors.WHITE }}>Home</a>
+                            <li className="nav-item me-4 fw-bold">
+                                Home
                             </li>
                         </Link>
                         <Link to={"/dashboard"}>
-                            <li class="nav-item me-4 fw-bold">
-                                <a class="nav-link" href="#" style={{ color: Colors.WHITE }}>Dashboard</a>
+                            <li className="nav-item me-4 fw-bold">
+                                Dashboard
                             </li>
                         </Link>
                         <Link to={"/home"}>
-                            <li class="nav-item me-4 fw-bold">
-                                <a class="nav-link" href="#" style={{ color: Colors.WHITE }}>Create</a>
+                            <li className="nav-item me-4 fw-bold">
+                                Create
                             </li>
                         </Link>
                         <Link to={"/groups"}>
-                            <li class="nav-item me-4 fw-bold">
-                                <a class="nav-link" href="#" style={{ color: Colors.WHITE }}>Groups</a>
+                            <li className="nav-item me-4 fw-bold">
+                                Groups
                             </li>
                         </Link>
                         <Link to={"/signin"}>
-                            <li class="nav-item me-4 fw-bold">
-                                <a class="nav-link btn" href="" style={{ color: Colors.WHITE, borderColor: Colors.SECONDARY }}>Sign in</a>
+                            <li className="nav-item me-4 fw-bold">
+                                Sign in
                             </li>
                         </Link>
                         <Link to={"/signup"}>
-                            <li class="nav-item me-4 fw-bold">
-                                <a class="nav-link btn" href="" style={{ color: Colors.WHITE, backgroundColor: Colors.BG }}>Sign up</a>
+                            <li className="nav-item me-4 fw-bold">
+                                Sign up
                             </li>
                         </Link>
+
+                        <li className="btn nav-item me-4 fw-bold text-danger" onClick={() => Logout()}>
+                            Sign out
+                        </li>
                     </ul>
                 </div>
             </div>

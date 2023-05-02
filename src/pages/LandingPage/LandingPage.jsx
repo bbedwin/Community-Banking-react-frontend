@@ -32,21 +32,21 @@ const LandingPage = () => {
           </div>
         </div>
         <div className="hero-svg">
-          <img src={HeroImage} alt="" srcset="" className='img-fluid' />
+          <img src={HeroImage} alt="Home" srcSet="" className='img-fluid' />
         </div>
       </div>
 
 
-      <div class="navbar fixed-bottom text-light py-2" style={{ backgroundColor: Colors.SECONDARY }}>
+      <div className="navbar fixed-bottom text-light py-2" style={{ backgroundColor: Colors.SECONDARY }}>
         <div className='text-light d-flex flex-column mx-auto text-center'>
           <p className="fw-bold text-center fs-5">Supporting Over 8 payment options</p>
 
           <div className="d-flex text-center mx-auto">
             <div className='me-4'>
-              <i class="bi bi-paypal"></i> <span>PayPal</span>
+              <i className="bi bi-paypal"></i> <span>PayPal</span>
             </div>
             <div>
-              <i class="bi bi-credit-card"></i> <span>Credit Card</span>
+              <i className="bi bi-credit-card"></i> <span>Credit Card</span>
             </div>
           </div>
         </div>

@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import ProjectContext from '../../context/MainContext'
 import { toast } from 'react-toastify'
 import axiosClient from '../../components/Axios'
-import Navbar from '../../components/navbar/Navbar'
 
 const Profile = () => {
     const { authToken, userInfo } = useContext(ProjectContext)

@@ -1,6 +1,5 @@
 import React from 'react'
 import './Loans.css'
-import Navbar from '../../components/navbar/Navbar'
 
 const Loans = () => {
     return (
