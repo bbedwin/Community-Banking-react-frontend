@@ -16,6 +16,7 @@ const Group = () => {
     const [isLoading, setLoading] = useState(true);
     const [groupDetails, setGroupDetails] = useState({})
     const [groupTotal, setGroupTotal] = useState(0)
+    const [showNotifications, setShowNotifications] = useState(false)
 
     async function getGroupDetails() {
         const response = await axiosClient.get(`/get-group-detail-by-id/${id}`,
@@ -100,7 +101,7 @@ const Group = () => {
                                 <Link to={`/apply-loan/${groupDetails.id}`}>
                                     <button type="button" className="btn btn-warning text-light me-2">
                                         <i className="bi bi-cash-coin fs-4 me-2"></i>
-                                        <span>Apply for a Loan</span>
+                                        <span>Apply Loan</span>
                                     </button>
                                 </Link>
                                 <Link to={`/contribute/${groupDetails.id}`}>
@@ -119,7 +120,7 @@ const Group = () => {
                                 <Link to={'/loans'}>
                                     <button type="button" className="btn btn-primary text-light me-2">
                                         <i className="bi bi-cash-coin fs-4 me-2"></i>
-                                        <span>Loans</span>
+                                        <span>Loan Applications</span>
                                     </button>
                                 </Link>
                                 <Link to={'/loan-statement'}>
@@ -145,30 +146,48 @@ const Group = () => {
 
                         <div className="card groups-list">
                             <div className="card-body">
-                                <p className="fs-3 fw-bold text-start">Group Members</p>
+                                <div className='d-flex justify-content-between'>
+                                    <div>
+                                        {
+                                            showNotifications
+                                                ?
+                                                <p className='fs-3 fw-bold text-start'>Annnouncements</p>
+                                                :
+                                                <p className="fs-3 fw-bold text-start">Group Members</p>
+                                        }
+                                    </div>
+                                    <i class="btn bi bi-bell fs-3" onClick={() => setShowNotifications(!showNotifications)}></i>
+                                </div>
                                 <table className="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Member Email</th>
-                                            <th scope="col">Joining Date</th>
-                                            <th scope="col">Role</th>
-                                            <th scope="col">Total Loan</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {groupDetails.group_trustees.map((trustee, i) => {
-                                            return (
-                                                <tr key={i + 1}>
-                                                    <th scope="row">{i + 1}</th>
-                                                    <td>{trustee.email}</td>
-                                                    <td>12-03-2021</td>
-                                                    <td>Member</td>
-                                                    <td>$200</td>
-                                                </tr>
-                                            )
-                                        })}
-                                    </tbody>
+                                    {
+                                        showNotifications
+                                            ?
+                                            <ul>
+                                                <li>Announcement 1</li>
+                                                <li>Announcement 2</li>
+                                                <li>Announcement 3</li>
+                                                <li>Announcement 4</li>
+                                                <li>Announcement 5</li>
+                                            </ul>
+                                            :<>
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Member</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {groupDetails.group_trustees.map((trustee, i) => {
+                                                        return (
+                                                            <tr key={i + 1}>
+                                                                <th scope="row">{i + 1}</th>
+                                                                <td>{trustee.email}</td>
+                                                            </tr>
+                                                        )
+                                                    })}
+                                                </tbody>
+                                            </>
+                                    }
                                 </table>
                             </div>
                         </div>

@@ -7,6 +7,7 @@ import NavigationBar from '../../components/NavigationBar/NavigationBar'
 const Loans = () => {
     const { authToken, userInfo } = useContext(ProjectContext)
     const [loans, setLoans] = useState([])
+    const [loading, setLoading] = useState(true)
 
     async function getMemberLoans() {
         const response = await axiosClient.get(`/member-loan-apply?trustee_id=${userInfo.user_id}`,
