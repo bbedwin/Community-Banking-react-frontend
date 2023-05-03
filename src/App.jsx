@@ -22,6 +22,10 @@ import LoanStatements from './pages/loan_statements/LoanStatements';
 import LoanRepayments from './pages/loan_repayments/LoanRepayments';
 import CreditIntrest from './pages/credit_interest/CreditIntrest';
 
+
+import LRepaymentSchedule from './pages/loan_repayment_schedule/loan_repayment_schedule';
+import InvestContribute from './pages/investor/InvestContribute';
+  
 function App() {
 
   return (
@@ -40,6 +44,7 @@ function App() {
         <Route path='/signin' element={<Login />}></Route>
         <Route path='/signup' element={<Signup />}></Route>
         <Route path='/' element={<LandingPage />}></Route>
+        <Route path='/loan-repayment-schedule' element={<LRepaymentSchedule />}></Route>
 
 
         <Route element={<PersistLogin />}>
@@ -58,6 +63,8 @@ function App() {
             <Route path='/loan-repayments' element={<LoanRepayments />}></Route>
             <Route path='/credit-interest' element={<CreditIntrest />}></Route>
             <Route path='/profile' element={<Profile />}></Route>
+            <Route path='/invest-contribute' element={<InvestContribute />}></Route>
+
           </Route>
         </Route>
       </Routes>

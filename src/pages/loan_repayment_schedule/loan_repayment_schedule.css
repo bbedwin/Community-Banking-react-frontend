@@ -1,0 +1,11 @@
+.loan-repay-bg {
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+@media only screen and (max-width: 768px) {
+    .loan-repay-form {
+        width: auto !important;
+        margin: auto;
+    }
+}
