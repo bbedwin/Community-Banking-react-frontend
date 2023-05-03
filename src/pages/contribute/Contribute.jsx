@@ -56,7 +56,7 @@ const Contribute = () => {
 
             if (response.status == 200) {
                 console.log(response.data)
-                toast.success("Loan application successful")
+                toast.success("Contribution made successfully")
                 navigate(`/group/${group_id}`)
             }
         } catch (error) {

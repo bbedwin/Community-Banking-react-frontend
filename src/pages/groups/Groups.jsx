@@ -42,7 +42,7 @@ const Groups = () => {
 
     if (isLoading) {
         return (
-            <div className="text-center fw-bold">Loadin....</div>
+            <div className="text-center fw-bold min-vh-100">Loadin....</div>
         )
     } else {
         return (

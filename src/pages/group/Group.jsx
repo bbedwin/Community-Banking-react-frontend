@@ -56,7 +56,7 @@ const Group = () => {
 
     if (isLoading) {
         return (
-            <div></div>
+            <div className='min-vh-100'></div>
         )
     } else {
         return (
@@ -68,15 +68,15 @@ const Group = () => {
                         <div className="group-details-card card-body">
                             <div>
                                 <span className='fs-4 fw-bold'>Group Name</span> <br />
-                                <small className='fs-5 fw-bold'>{groupDetails.group_name}</small>
+                                <small className='fs-5 fw-bold'>{groupDetails?.group_name}</small>
                             </div>
                             <div>
                                 <span className='fs-4 fw-bold'>Group Code</span> <br />
-                                <small className='fs-5 fw-bold'>{groupDetails.group_code}</small>
+                                <small className='fs-5 fw-bold'>{groupDetails?.group_code}</small>
                             </div>
                             <div>
                                 <span className='fs-4 fw-bold'>Account Number</span> <br />
-                                <small className='fs-5 fw-bold'>{groupDetails.account_number | 0}</small>
+                                <small className='fs-5 fw-bold'>{groupDetails?.account_number || 0}</small>
                             </div>
 
                             <div>
@@ -85,7 +85,7 @@ const Group = () => {
                             </div>
                             <div>
                                 <span className='fs-4 fw-bold'>Number of Members</span> <br />
-                                <small className='fs-5 fw-bold'>{groupDetails.group_trustees.length | 0}</small>
+                                <small className='fs-5 fw-bold'>{groupDetails?.group_trustees?.length ? groupDetails.group_trustees.length : 0}</small>
                             </div>
                             <div>
                                 <span className='fs-4 fw-bold'>Total Contributions</span> <br />
@@ -95,8 +95,8 @@ const Group = () => {
                     </div>
 
                     <div>
-                        <div className="d-md-flex justify-content-between align-items-center">
-                            <div className='d-flex'>
+                        <div className="d-md-flex justify-content-between align-items-center my-4">
+                            <div className=''>
                                 <Link to={`/apply-loan/${groupDetails.id}`}>
                                     <button type="button" className="btn btn-warning text-light me-2">
                                         <i className="bi bi-cash-coin fs-4 me-2"></i>
@@ -109,14 +109,37 @@ const Group = () => {
                                         <span>Contribute</span>
                                     </button>
                                 </Link>
-                                <button type="button" className="btn btn-primary text-light me-2">
-                                    <i className="bi bi-cash-coin fs-4 me-2"></i>
-                                    <span>Repay Loan</span>
-                                </button>
-                            </div>
-                            <div className="input-group w-50 my-5">
-                                <input type="search" name='group-name' className="form-control" placeholder="group name" />
-                                <button className="btn btn-outline-success" type="button" id="button-addon2">Search</button>
+
+                                <Link to={"/repay-loan"}>
+                                    <button type="button" className="btn btn-primary text-light me-2">
+                                        <i className="bi bi-cash-coin fs-4 me-2"></i>
+                                        <span>Repay Loan</span>
+                                    </button>
+                                </Link>
+                                <Link to={'/loans'}>
+                                    <button type="button" className="btn btn-primary text-light me-2">
+                                        <i className="bi bi-cash-coin fs-4 me-2"></i>
+                                        <span>Loans</span>
+                                    </button>
+                                </Link>
+                                <Link to={'/loan-statement'}>
+                                    <button type="button" className="btn btn-danger text-light me-2">
+                                        <i className="bi bi-cash-coin fs-4 me-2"></i>
+                                        <span>Loan Statement</span>
+                                    </button>
+                                </Link>
+                                <Link to={"/loan-repayments"}>
+                                    <button type="button" className="btn btn-secondary text-light me-2">
+                                        <i className="bi bi-cash-coin fs-4 me-2"></i>
+                                        <span>Loan Repayments</span>
+                                    </button>
+                                </Link>
+                                <Link to={"/credit-interest"}>
+                                    <button type="button" className="btn btn-secondary text-light me-2">
+                                        <i className="bi bi-cash-coin fs-4 me-2"></i>
+                                        <span>Credit Interest</span>
+                                    </button>
+                                </Link>
                             </div>
                         </div>
 

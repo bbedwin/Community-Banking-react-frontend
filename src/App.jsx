@@ -17,6 +17,10 @@ import Profile from './pages/profile/Profile'
 import ApplyLoan from './pages/apply_loan/ApplyLoan'
 import Contribute from './pages/contribute/Contribute'
 import LandingPage from './pages/LandingPage/LandingPage'
+import RepayLoan from './pages/repay_loan/RepayLoan';
+import LoanStatements from './pages/loan_statements/LoanStatements';
+import LoanRepayments from './pages/loan_repayments/LoanRepayments';
+import CreditIntrest from './pages/credit_interest/CreditIntrest';
 
 function App() {
 
@@ -49,6 +53,10 @@ function App() {
             <Route path='/apply-loan/:group_id' exact element={<ApplyLoan />}></Route>
             <Route path='/contribute/:group_id' exact element={<Contribute />}></Route>
             <Route path='/loans' element={<Loans />}></Route>
+            <Route path='/repay-loan' element={<RepayLoan />}></Route>
+            <Route path='/loan-statement' element={<LoanStatements />}></Route>
+            <Route path='/loan-repayments' element={<LoanRepayments />}></Route>
+            <Route path='/credit-interest' element={<CreditIntrest />}></Route>
             <Route path='/profile' element={<Profile />}></Route>
           </Route>
         </Route>
