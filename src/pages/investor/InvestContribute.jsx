@@ -1,8 +1,12 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
+import axiosClient from '../../components/Axios';
 import NavigationBar from '../../components/NavigationBar/NavigationBar';
 import './Contribute.css';
 
 const InvestContribute = () => {
+
+  const [loading, setLoading] = useState(true)
+  const [groupLoans, setGroupLoans] = useState([])
   const [showContribute, setShowContribute] = useState(false);
   const [showDeposit, setShowDeposit] = useState(false);
   const [showLoanRequest, setShowLoanRequest] = useState(false);
@@ -24,6 +28,26 @@ const InvestContribute = () => {
     setShowContribute(false);
     setShowDeposit(false);
   };
+
+  async function getGroupLoans() {
+    const response = await axiosClient.get(`/group-loan-apply/`,
+      {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    )
+
+    console.log(response.data)
+    setGroupLoans(response.data)
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    let mounted = true;
+    getGroupLoans()
+    return () => mounted = false;
+  }, [])
 
   return (
     <div className='invest-contribute-bg'>
@@ -166,26 +190,32 @@ const InvestContribute = () => {
                        <div className="card-body">
                        <table className="table table-hover">
                             <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Group Id</th>
-                                    <th scope="col">Group Admin</th>
-                                    <th scope="col">Amount</th>
-                                    <th scope="col">Date Of Applied</th>
-                                </tr>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Group Name</th>
+                                <th scope="col">Loan Amount</th>
+                                <th scope="col">Loan Period</th>
+                                <th scope="col">Percentage Return</th>
+                                <th scope="col">Action</th>
+                              </tr>
                             </thead>
-                            <tbody>
-                                
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>grp001</td>
-                                                <td>Nasim</td>
-                                                <td>$ 50000</td>
-                                                <td>03-05-2023</td>
-                                            </tr>
-                                        
-                                
-                            </tbody>
+                      <tbody>
+                        {groupLoans.map((loan, i) => {
+                          return (
+                            <tr key={i + 1}>
+                              <th scope="row">{i + 1}</th>
+                              <td>{loan.group_id}</td>
+                              <td>{loan.loan_amount}</td>
+                              <td>{loan.loan_period}</td>
+                              <td>{loan.percentage_return}</td>
+                              <td>
+                                <button type='button' className="btn btn-success">Approve</button>
+                              </td>
+                            </tr>
+                          )
+                        })}
+
+                      </tbody>
                         </table>
 
                     </div>
