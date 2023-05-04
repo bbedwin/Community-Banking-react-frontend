@@ -13,9 +13,9 @@ const ApplyLoan = () => {
 
     const { group_id } = useParams();
 
-    const [loanAmount, setLoanAmount] = useState('')
-    const [loanPeriod, setLoanPeriod] = useState('')
-    const [interestRate, setInterestRate] = useState('')
+    const [loanAmount, setLoanAmount] = useState(0)
+    const [loanPeriod, setLoanPeriod] = useState(0)
+    const [interestRate, setInterestRate] = useState(0)
 
     const applyLoan = async (e) => {
         e.preventDefault()

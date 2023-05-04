@@ -25,6 +25,7 @@ import CreditIntrest from './pages/credit_interest/CreditIntrest';
 
 import LRepaymentSchedule from './pages/loan_repayment_schedule/loan_repayment_schedule';
 import InvestContribute from './pages/investor/InvestContribute';
+import GroupLoan from './pages/group_loan/GroupLoan';
   
 function App() {
 
@@ -59,6 +60,7 @@ function App() {
             <Route path='/contribute/:group_id' exact element={<Contribute />}></Route>
             <Route path='/loans' element={<Loans />}></Route>
             <Route path='/repay-loan' element={<RepayLoan />}></Route>
+            <Route path='/group-loan' element={<GroupLoan />}></Route>
             <Route path='/loan-statement' element={<LoanStatements />}></Route>
             <Route path='/loan-repayments' element={<LoanRepayments />}></Route>
             <Route path='/credit-interest' element={<CreditIntrest />}></Route>

@@ -20,12 +20,12 @@ const LRepaymentSchedule = () => {
         e.preventDefault()
 
         try {
-            const response = await axiosClient.post('/loan-module/repayment-schedule/', JSON.stringify({
+            const response = await axiosClient.post('/loan-module/repayment-schedule/', {
                 "loan_amount": loanAmount,
                 "terms_in_year": loanIntrestterm,
                 "frequency": loanFrequency,
                 "interest_rate": loanIntrestrate,
-            }),)
+            })
 
             if (response.status == 201) {
                 toast.success("Repayment Scheduled successfully")
@@ -72,18 +72,18 @@ const LRepaymentSchedule = () => {
                                 <label htmlFor="terms_in_year" className="form-label">Interest Terms In Year</label>
                                 <input type="text" className="form-control" id="terms_in_year" onChange={(e) => { setLoanIntrestTerm(e.target.value) }} />
                             </div>
-                           
+
                             <div className="mb-3">
                                 <label htmlFor="frequency" className="form-label">Frequency</label>
                                 <select className="form-select" id='frequency' name='Frequency'
                                     onChange={(e) => { setLoanFrequency(e.target.value) }}>
-                                    <option value="Daily">Daily</option>
-                                    <option value="Weekly">Weekly</option>
-                                    <option value="Montly">Montly</option>
-                                    <option value="Quaterly">Quaterly</option>
-                                    <option value="Half_Yearly">Half Yearly</option>
-                                    <option value="Annualy">Annualy</option>
-               </select>
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                    <option value="montly">Montly</option>
+                                    <option value="quarterly">Quaterly</option>
+                                    <option value="half_yearly">Half Yearly</option>
+                                    <option value="annualy">Annualy</option>
+                                </select>
                             </div>
                             <div className="mb-3">
                                 <label className="form-label" htmlFor="interest_rate">Interest Rate In Percentage</label>

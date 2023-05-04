@@ -60,31 +60,33 @@ const Groups = () => {
 
                     <div className='min-vh-100'>
                         <div className="card groups-list">
-                            <table className="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Group Name</th>
-                                        <th scope="col">Group Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {groups.map((group, i) => {
-                                        return (
-                                            <tr key={i + 1}>
-                                                <th scope="row">{i + 1}</th>
-                                                <td>
-                                                    <a href="/group/" className='text-primary' onClick={(e) => { e.preventDefault(); navigate(`/group/${group.id}`) }}>
-                                                        {group.group_name}
-                                                    </a>
-                                                </td>
-                                                <td>{group.group_description}</td>
-                                            </tr>
-                                        )
-                                    })}
+                            <div className="card-body">
+                                <table className="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Group Name</th>
+                                            <th scope="col">Group Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {groups.map((group, i) => {
+                                            return (
+                                                <tr key={i + 1}>
+                                                    <th scope="row">{i + 1}</th>
+                                                    <td>
+                                                        <a href="/group/" className='text-primary' onClick={(e) => { e.preventDefault(); navigate(`/group/${group.id}`) }}>
+                                                            {group.group_name}
+                                                        </a>
+                                                    </td>
+                                                    <td>{group.group_description}</td>
+                                                </tr>
+                                            )
+                                        })}
 
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
