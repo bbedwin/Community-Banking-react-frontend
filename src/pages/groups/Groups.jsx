@@ -49,7 +49,7 @@ const Groups = () => {
             <div className='d-flex min-vh-100 flex-column'>
                 <NavigationBar />
 
-                <div className='container min-vh-100'>
+                <div className='container'>
                     <div className="d-flex justify-content-between align-items-center">
                         <p className="fw-bold text-light fs-2">{groups.length} Group(s)</p>
                         <div className="input-group my-5 w-50">
@@ -58,7 +58,7 @@ const Groups = () => {
                         </div>
                     </div>
 
-                    <div className='min-vh-100'>
+                    <div>
                         <div className="card groups-list">
                             <div className="card-body">
                                 <table className="table table-hover">

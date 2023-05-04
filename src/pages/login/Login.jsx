@@ -37,8 +37,6 @@ const Login = () => {
 
             console.log(userInfo)
 
-            toast.success("Successfully logged in");
-
             navigate('/home')
 
         } catch (error) {

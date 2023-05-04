@@ -56,7 +56,7 @@ function App() {
             <Route path='/dashboard' element={<Dashboard />}></Route>
             <Route path='/create-group' element={<CreateGroup />}></Route>
             <Route path='/join-group' element={<JoinGroup />}></Route>
-            <Route path='/apply-loan/:group_id' exact element={<ApplyLoan />}></Route>
+            <Route path='/apply-loan/' exact element={<ApplyLoan />}></Route>
             <Route path='/contribute/:group_id' exact element={<Contribute />}></Route>
             <Route path='/loans' element={<Loans />}></Route>
             <Route path='/repay-loan' element={<RepayLoan />}></Route>

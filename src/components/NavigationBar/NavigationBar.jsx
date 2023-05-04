@@ -16,7 +16,7 @@ const NavigationBar = () => {
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     </ul>
 
-                    <ul className='navbar-nav mb-2'>
+                    <ul className='navbar-nav py-3'>
                         <Link to={"/"}>
                             <li className="nav-item me-4 fw-bold">
                                 Home
@@ -37,20 +37,29 @@ const NavigationBar = () => {
                                 Groups
                             </li>
                         </Link>
-                        <Link to={"/signin"}>
-                            <li className="nav-item me-4 fw-bold">
-                                Sign in
-                            </li>
-                        </Link>
-                        <Link to={"/signup"}>
-                            <li className="nav-item me-4 fw-bold">
-                                Sign up
-                            </li>
-                        </Link>
 
-                        <li className="btn nav-item me-4 fw-bold text-danger" onClick={() => Logout()}>
-                            Sign out
-                        </li>
+                        {
+                            localStorage.getItem("status") == 0
+                                ?
+                                <>
+                                    <Link to={"/signin"}>
+                                        <li className="nav-item me-4 fw-bold">
+                                            Sign in
+                                        </li>
+                                    </Link>
+                                    <Link to={"/signup"}>
+                                        <li className="nav-item me-4 fw-bold">
+                                            Sign up
+                                        </li>
+                                    </Link>
+                                </>
+                                :
+                                <Link onClick={() => Logout()}>
+                                    <li className="nav-item me-4 fw-bold text-danger">
+                                        Sign out
+                                    </li>
+                                </Link>
+                        }
                     </ul>
                 </div>
             </div>

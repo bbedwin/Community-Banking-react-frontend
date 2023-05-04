@@ -1,5 +1,5 @@
 import { React, useState, useContext, useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import ProjectContext from '../../context/MainContext'
 import axiosClient from '../../components/Axios'
@@ -11,11 +11,30 @@ const ApplyLoan = () => {
     const { authToken, userInfo } = useContext(ProjectContext)
     const navigate = useNavigate()
 
-    const { group_id } = useParams();
+    const location = useLocation()
+    const { admin, group_id } = location.state
+
+    console.log(`Admin is ${admin}, Group ID is ${group_id}`)
 
     const [loanAmount, setLoanAmount] = useState(0)
     const [loanPeriod, setLoanPeriod] = useState(0)
     const [interestRate, setInterestRate] = useState(0)
+    const [loans, setLoans] = useState([])
+    const [loading, setLoading] = useState(true)
+
+    async function getMemberLoans() {
+        const response = await axiosClient.get(`/member-loan-apply?trustee_id=${userInfo.user_id}`,
+            {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }
+        )
+
+        console.log(response.data)
+        setLoans(response.data)
+        setLoading(false);
+    }
 
     const applyLoan = async (e) => {
         e.preventDefault()
@@ -48,6 +67,42 @@ const ApplyLoan = () => {
         }
 
     }
+
+    const approveLoan = async (e, loan_id) => {
+        e.preventDefault()
+
+        try {
+            const response = await axiosClient.post('loan-approval/', {
+                "loan_apply_id": loan_id,
+                "group_admin_id": admin,
+                "group_id": group_id,
+            },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${authToken || localStorage.getItem('authToken')}`
+                    }
+                }
+            )
+
+            console.log(response.data)
+
+            if (response.status == 200) {
+                toast.success("Loan approved")
+                getMemberLoans()
+            }
+        } catch (error) {
+            toast.warn(error.response.data.status)
+            console.log(error)
+        }
+
+    }
+
+    useEffect(() => {
+        let mounted = true;
+        getMemberLoans()
+        return () => mounted = false;
+    }, [])
 
     return (
         <div className='apply-loan-bg'>
@@ -92,6 +147,68 @@ const ApplyLoan = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div className='container'>
+                <div className="text-light">
+                    <p className="fw-bold fs-2">{loans?.length || 0} Loan(s)</p>
+                </div>
+
+                <div>
+                    <div className="card groups-list">
+                        <div className="card-body">
+                            <p className="fs-4 ps-4 fw-bold">Your Loans</p>
+                            <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Group Name</th>
+                                        <th scope="col">Loan Amount</th>
+                                        <th scope="col">Loan Status</th>
+                                        <th scope="col">Credit Status</th>
+                                        {
+                                            admin == userInfo.user_id
+                                                ?
+                                                <th scope="col">Action</th>
+                                                :
+                                                null
+                                        }
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {loans.map((loan, i) => {
+                                        return (
+                                            <tr key={i + 1}>
+                                                <th scope="row">{i + 1}</th>
+                                                <td>
+                                                    {loan.group_name}
+                                                </td>
+                                                <td>{loan.loan_amount}</td>
+                                                <td>{loan.is_approved ? "Approved" : "Not Approved"}</td>
+                                                <td className='fw-bold text-success btn'>Good</td>
+                                                {
+                                                    admin == userInfo.user_id
+                                                        ?
+                                                        <td>{
+                                                            loan.is_approved
+                                                                ?
+                                                                "Approved"
+                                                                :
+                                                                <button type='button' className='btn btn-success' onClick={(e) => approveLoan(e, loan.id) }>Approve</button>
+                                                        }</td>
+                                                        :
+                                                        null
+                                                }
+                                            </tr>
+                                        )
+                                    })}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     )

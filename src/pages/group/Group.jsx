@@ -65,12 +65,12 @@ const Group = () => {
                 <NavigationBar />
 
                 <div className='nav d-flex justify-content-center bg-dark py-1'>
-                    <Link to={`/apply-loan/${groupDetails?.id}`}>
+                    <Link to='/apply-loan/' state={{ admin: groupDetails?.group_admin?.id, group_id: groupDetails?.id }}>
                         <button type="button" className="btn btn-outline-warning my-1 text-light me-2">
-                            <span>Apply Loan</span>
+                            <span>Loans</span>
                         </button>
                     </Link>
-                    <Link to={`/group-loan`}>
+                    <Link to='/group-loan' state={{ group_id: groupDetails?.id }}>
                         <button type="button" className="btn btn-outline-warning my-1 text-light me-2">
                             <span>Group Loan</span>
                         </button>
@@ -84,11 +84,6 @@ const Group = () => {
                     <Link to={"/repay-loan"}>
                         <button type="button" className="btn btn-outline-warning my-1 text-light me-2">
                             <span>Repay Loan</span>
-                        </button>
-                    </Link>
-                    <Link to='/loans' state={{ admin: groupDetails?.group_admin?.id }}>
-                        <button type="button" className="btn btn-outline-warning my-1 text-light me-2">
-                            <span>Loan Applications</span>
                         </button>
                     </Link>
                     <Link to={'/loan-statement'}>
@@ -143,7 +138,7 @@ const Group = () => {
                                                 <p className="fs-3 fw-bold text-start">Group Members</p>
                                         }
                                     </div>
-                                    <i class="btn bi bi-bell-fill text-success fs-3" onClick={() => setShowNotifications(!showNotifications)}></i>
+                                    <i className="btn bi bi-bell-fill text-success fs-3" onClick={() => setShowNotifications(!showNotifications)}></i>
                                 </div>
                                 <table className="table table-hover">
                                     {
