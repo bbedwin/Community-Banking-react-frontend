@@ -1,3 +1,4 @@
+
 import { React, useState, useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ProjectContext from '../../context/MainContext'
@@ -9,6 +10,7 @@ import NavigationBar from '../../components/NavigationBar/NavigationBar'
 const Groups = () => {
     const { userInfo, authToken, setGroups, groups } = useContext(ProjectContext)
     const [isLoading, setLoading] = useState(true);
+    const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate()
 
     const getGroups = async () => {
@@ -34,6 +36,10 @@ const Groups = () => {
         }
     }
 
+    const searchGroups = (event) => {
+        setSearchTerm(event.target.value);
+    }
+
     useEffect(() => {
         let mounted = true;
         getGroups()
@@ -45,16 +51,19 @@ const Groups = () => {
             <div className="text-center fw-bold min-vh-100">Loadin....</div>
         )
     } else {
+        const filteredGroups = groups.filter(group =>
+            group.group_name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+
         return (
             <div className='d-flex min-vh-100 flex-column'>
                 <NavigationBar />
 
                 <div className='container min-vh-100'>
                     <div className="d-flex justify-content-between align-items-center">
-                        <p className="fw-bold text-light fs-2">{groups.length} Group(s)</p>
+                        <p className="fw-bold text-light fs-2">{filteredGroups.length} Group(s)</p>
                         <div className="input-group my-5 w-50">
-                            <input type="search" name='group-name' className="form-control" placeholder="group name" />
-                            <button className="btn btn-light" type="button" id="button-addon2">Search</button>
+                            <input type="search" name='group-name' className="form-control" placeholder="Search Your Group Name Here.." onKeyUp={searchGroups} />
                         </div>
                     </div>
 
@@ -70,7 +79,7 @@ const Groups = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {groups.map((group, i) => {
+                                        {filteredGroups.map((group, i) => {
                                             return (
                                                 <tr key={i + 1}>
                                                     <th scope="row">{i + 1}</th>
@@ -83,16 +92,15 @@ const Groups = () => {
                                                 </tr>
                                             )
                                         })}
-
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        )
-    }
-}
+                             </div>
+         )
+     }
+ }
 
 export default Groups
