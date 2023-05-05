@@ -159,7 +159,7 @@ const Group = () => {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {groupDetails.group_trustees.map((trustee, i) => {
+                                                    {groupDetails?.group_trustees?.map((trustee, i) => {
                                                         return (
                                                             <tr key={i + 1}>
                                                                 <th scope="row">{i + 1}</th>

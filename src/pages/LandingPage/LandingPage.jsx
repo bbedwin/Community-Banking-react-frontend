@@ -19,7 +19,8 @@ const LandingPage = () => {
             Community Banking
           </p>
           <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quibusdam quam quod suscipit perferendis aut rerum dolores possimus, ratione iure rem tempora distinctio ex. Quibusdam, cupiditate suscipit commodi, repudiandae dolorum beatae quas nesciunt officiis praesentium reprehenderit eius eaque, nihil soluta! Unde eveniet magnam praesentium quibusdam dicta? Molestias possimus molestiae iure alias.
+            “Don't wait for better Investment options, Invest and then wait for better time.”
+            ― Ankit Samrat
           </p>
 
           <div className='mt-5'>

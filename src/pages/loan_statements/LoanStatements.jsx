@@ -10,83 +10,118 @@ const LoanStatements = () => {
     // Get Group ID
     let { id } = useParams();
 
+    const [isLoading, setLoading] = useState(true);
+    const [loanID, setLoanID] = useState()
+    const [loans, setLoans] = useState([])
+    const [loanStatements, setLoanStatements] = useState([]);
+
+    async function getMemberLoans() {
+        const response = await axiosClient.get(`/member-loan-apply?trustee_id=${userInfo.user_id}`,
+            {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }
+        )
+
+        console.log(response.data)
+        setLoans(response.data)
+        setLoading(false);
+    }
+
+    const getLoanStatement = async (e) => {
+        e.preventDefault()
+        const response = await axiosClient.get(`/get-loan-statement-by-loan-id/?loan_id=${loanID}`,
+            {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }
+        )
+
+        console.log(response.data)
+        setLoanStatements(response.data)
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        let mounted = true;
+        getMemberLoans()
+        return () => mounted = false;
+    }, [])
+
     return (
         <div className='d-flex min-vh-100 flex-column'>
             <NavigationBar />
-            
+
             <div className="container mt-4">
-                <div className="card groups-list">
+                <div className="card">
                     <div className="card-body">
-                        <p className="fs-3 fw-bold text-center">Loan Statement</p>
-                        <div className='my-5'>
-                            <div className="d-flex justify-content-center align-items-center">
-                                <p className='fw-bold me-5'>Time Period: 1 year</p>
-                                <p className='fw-bold'>Rate of interest: 0%</p>
-                            </div>
-                            <div className="d-flex justify-content-center align-items-center">
-                                <p className='fw-bold me-5'>Loan Amount: KES 100,000</p>
-                                <p className='fw-bold'>Taken from: 02-05-2023</p>
-                            </div>
+                        <form action="" className='d-flex' onSubmit={getLoanStatement}>
+                            <select className="form-select" aria-label="Default select example" onChange={(e) => setLoanID(e.target.value)}>
+                                <option selected>Open this select menu</option>
+                                {
+                                    loans.map((loan, i) => {
+                                        return (
+                                            <option key={i} value={loan.loan_id}>{loan.group_name} for {loan.loan_amount}</option>
+                                        )
+                                    })
+                                }
+                            </select>
 
-                            <p className="fw-bold fs-4 text-center">Last Payment: 15-09-2023</p>
-                        </div>
-
-                        <table className="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Loan payment</th>
-                                    <th scope="col">Principal</th>
-                                    <th scope="col">Interest</th>
-                                    <th scope="col">Principal Balance</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">7</th>
-                                    <td>12-03-2021</td>
-                                    <td>200</td>
-                                    <td>KES 12,000</td>
-                                    <td>KES 200</td>
-                                    <td>KES 200</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">7</th>
-                                    <td>12-03-2021</td>
-                                    <td>200</td>
-                                    <td>KES 12,000</td>
-                                    <td>KES 200</td>
-                                    <td>KES 200</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">7</th>
-                                    <td>12-03-2021</td>
-                                    <td>200</td>
-                                    <td>KES 12,000</td>
-                                    <td>KES 200</td>
-                                    <td>KES 200</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">7</th>
-                                    <td>12-03-2021</td>
-                                    <td>200</td>
-                                    <td>KES 12,000</td>
-                                    <td>KES 200</td>
-                                    <td>KES 200</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">7</th>
-                                    <td>12-03-2021</td>
-                                    <td>200</td>
-                                    <td>KES 12,000</td>
-                                    <td>KES 200</td>
-                                    <td>KES 200</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                            <button type='submit' className="btn btn-success">Choose</button>
+                        </form>
                     </div>
                 </div>
+            </div>
+
+            <div className="container mt-4">
+                {
+                    loanStatements.length > 0
+                        ?
+                        <div className="card groups-list">
+                            <div className="card-body">
+                                <p className="fs-3 fw-bold text-center">Loan Statement</p>
+                                <div className='my-5'>
+                                    <p className="fw-bold fs-4 text-center">Loan ID: {loanStatements[0]?.loan_id}</p>
+                                    <p className="fw-bold fs-4 text-center">Date: {loanStatements[0]?.created_at.slice(0, 10)}</p>
+                                </div>
+
+                                <table className="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Loan ID</th>
+                                            <th scope="col">Principal</th>
+                                            <th scope="col">Interest</th>
+                                            <th scope="col">Paid at</th>
+                                            <th scope="col">Repayment Date</th>
+                                            <th scope="col">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            loanStatements?.map((statement, i) => {
+                                                return (
+                                                    <tr key={i}>
+                                                        <th scope="row">{i+1}</th>
+                                                        <td>{statement.loan_id}</td>
+                                                        <td>KES {statement.principal_amount}</td>
+                                                        <td>KES {statement.total_interest_amount}</td>
+                                                        <td>{statement.paid_at | 'null'}</td>
+                                                        <td>{statement.repayment_date}</td>
+                                                        <td>{statement.status}</td>
+                                                    </tr>
+                                                )
+                                            })
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        :
+                        null
+                }
             </div>
         </div>
     )

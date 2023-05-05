@@ -14,7 +14,52 @@ const RepayLoan = () => {
 
     const [paymentMode, setPaymentMode] = useState([])
     const [chooosenMode, setChoosenMode] = useState()
+    const [loading, setLoading] = useState(true)
     const [loanAmount, setLoanAmount] = useState('')
+    const [loanID, setLoanID] = useState()
+    const [loans, setLoans] = useState([])
+
+    async function repayLoan(e) {
+        e.preventDefault()
+        const selected_loan = loans.find(x => x.id == loanID)
+        console.log(selected_loan)
+        try {
+            const response = await axiosClient.post('/loan-repay/', 
+                JSON.stringify({
+                    "serial_no": selected_loan.id,
+                    "loan_id": loanID,
+                    "repayment_amount": loanAmount
+                }),
+                {
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }
+            )
+
+            console.log(response.data)
+            setLoanID(null)
+            setLoanAmount(null)
+        } catch (error) {
+            setLoanID(null)
+            setLoanAmount(null)
+            console.log(error)
+        }
+    }
+
+    async function getMemberLoans() {
+        const response = await axiosClient.get(`/member-loan-apply?trustee_id=${userInfo.user_id}`,
+            {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }
+        )
+
+        console.log(response.data)
+        setLoans(response.data)
+        setLoading(false);
+    }
 
     async function getPaymentModes() {
         const response = await axiosClient.get('/payment-mode/',
@@ -30,6 +75,7 @@ const RepayLoan = () => {
 
     useEffect(() => {
         let mounted = true;
+        getMemberLoans()
         getPaymentModes()
         return () => mounted = false;
     }, [])
@@ -45,14 +91,27 @@ const RepayLoan = () => {
                 <div className="card apply-loan-form" style={{ width: "30rem" }}>
                     <h3 className="text-center card-header">Repay Your Loan</h3>
                     <div className="card-body">
-                        <form>
+                        <form onSubmit={repayLoan}>
+                            <div>
+                                <label htmlFor="loan" className="form-label">Loan</label>
+                                <select className="form-select" id='loan' onChange={(e) => setLoanID(e.target.value)}>
+                                    <option selected>Open this select menu</option>
+                                    {
+                                        loans.map((loan, i) => {
+                                            return (
+                                                <option key={i} value={loan.id}>{loan.group_name} for {loan.loan_amount}</option>
+                                            )
+                                        })
+                                    }
+                                </select>
+                            </div>
                             <div className="mb-3">
                                 <label htmlFor="loanAmount" className="form-label">Amount</label>
-                                <input type="number" className="form-control" id="loanAmount" onChange={(e) => setLoanAmount(e.target.value)} />
+                                <input type="number" className="form-control" id="loanAmount" defaultValue={loanAmount} onChange={(e) => setLoanAmount(e.target.value)} />
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="paymentMode" className="form-label">Mode of payment</label>
-                                <select className="form-select" id='paymentMode' onChange={(e) => setChoosenMode(e.target.value)} required={true}>
+                                <select className="form-select" id='paymentMode' defaultValue={chooosenMode} onChange={(e) => setChoosenMode(e.target.value)} required={true}>
                                     <option selected value={""}>Open to select</option>
                                     {
                                         paymentMode.map((mode, i) => {

@@ -48,7 +48,7 @@ function App() {
         <Route path='/' element={<LandingPage />}></Route>
         <Route path='/loan-repayment-schedule' element={<LRepaymentSchedule />}></Route>
 
-        
+
         <Route element={<PersistLogin />}>
           <Route element={<ProtectedRoutes />}>
             <Route path='/groups' element={<Groups />}></Route>
