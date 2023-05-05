@@ -26,7 +26,8 @@ import CreditIntrest from './pages/credit_interest/CreditIntrest';
 import LRepaymentSchedule from './pages/loan_repayment_schedule/loan_repayment_schedule';
 import InvestContribute from './pages/investor/InvestContribute';
 import GroupLoan from './pages/group_loan/GroupLoan';
-  
+import InvestorRegisterGroup from './pages/invest_on_group/investor_register';
+
 function App() {
 
   return (
@@ -47,7 +48,7 @@ function App() {
         <Route path='/' element={<LandingPage />}></Route>
         <Route path='/loan-repayment-schedule' element={<LRepaymentSchedule />}></Route>
 
-
+        
         <Route element={<PersistLogin />}>
           <Route element={<ProtectedRoutes />}>
             <Route path='/groups' element={<Groups />}></Route>
@@ -66,6 +67,7 @@ function App() {
             <Route path='/credit-interest' element={<CreditIntrest />}></Route>
             <Route path='/profile' element={<Profile />}></Route>
             <Route path='/invest-contribute' element={<InvestContribute />}></Route>
+            <Route path='/investor-register-group' element={<InvestorRegisterGroup />}></Route>
 
           </Route>
         </Route>

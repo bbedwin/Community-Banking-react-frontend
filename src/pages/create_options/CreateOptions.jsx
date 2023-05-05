@@ -56,7 +56,7 @@ const CreateOptions = () => {
                                 <div className="card-body">
                                     <h5 className="card-title">Become an investor</h5>
                                     <p className="card-text">Invest in a group and start reaping benefits</p>
-                                    <button type='button' className="btn btn-secondary w-100 btn-lg"  onClick={(e) => navigate('/invest-contribute')}>Invest</button>
+                                    <button type='button' className="btn btn-secondary w-100 btn-lg"  onClick={(e) => navigate('/investor-register-group')}>Invest</button>
                                 </div>
                             </div>
                         </div>
