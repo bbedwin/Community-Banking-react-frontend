@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL = 'http://localhost:8000'
+const BASE_URL = 'https://bbv2cb.pythonanywhere.com/'
 
 const axiosClient = axios.create({
     baseURL: BASE_URL
