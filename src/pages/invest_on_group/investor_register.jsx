@@ -55,6 +55,7 @@ const InvestorRegisterGroup = () => {
                     }
                 }
             )
+            getAllInvestorGroups()
             console.log(response.data)
         } catch (error) {
             console.log(error)
