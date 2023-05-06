@@ -57,19 +57,22 @@ const LoanStatements = () => {
             <div className="container mt-4">
                 <div className="card">
                     <div className="card-body">
-                        <form action="" className='d-flex' onSubmit={getLoanStatement}>
-                            <select className="form-select" aria-label="Default select example" onChange={(e) => setLoanID(e.target.value)}>
-                                <option selected>Open this select menu</option>
-                                {
-                                    loans.map((loan, i) => {
-                                        return (
-                                            <option key={i} value={loan.loan_id}>{loan.group_name} for {loan.loan_amount}</option>
-                                        )
-                                    })
-                                }
-                            </select>
+                        <form action="" onSubmit={getLoanStatement}>
+                            <label className="form-label" htmlFor="loan">Choose Loan</label>
+                            <div className="d-flex">
+                                <select className="form-select" id='loan' onChange={(e) => { setLoanID(e.target.value); setLoanStatements([]) }}>
+                                    <option selected>Open this select menu</option>
+                                    {
+                                        loans.map((loan, i) => {
+                                            return (
+                                                <option key={i} value={loan.loan_id}>{loan.group_name} for {loan.loan_amount}</option>
+                                            )
+                                        })
+                                    }
+                                </select>
 
-                            <button type='submit' className="btn btn-success">Choose</button>
+                                <button type='submit' className="btn btn-success">Choose</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -104,7 +107,7 @@ const LoanStatements = () => {
                                             loanStatements?.map((statement, i) => {
                                                 return (
                                                     <tr key={i}>
-                                                        <th scope="row">{i+1}</th>
+                                                        <th scope="row">{i + 1}</th>
                                                         <td>{statement.loan_id}</td>
                                                         <td>KES {statement.principal_amount}</td>
                                                         <td>KES {statement.total_interest_amount}</td>
@@ -120,7 +123,7 @@ const LoanStatements = () => {
                             </div>
                         </div>
                         :
-                        null
+                        <p className="fs-4 text-center text-light">No loan choosen</p>
                 }
             </div>
         </div>
