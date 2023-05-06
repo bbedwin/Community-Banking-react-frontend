@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import ProjectContext from '../../context/MainContext'
 import { toast } from 'react-toastify'
 import axiosClient from '../../components/Axios'
+import NavigationBar from '../../components/NavigationBar/NavigationBar'
 
 const Profile = () => {
     const { authToken, userInfo } = useContext(ProjectContext)
@@ -49,7 +50,7 @@ const Profile = () => {
         <div className='profile min-vh-100'>
             <div className='content'>
                 <div className="pb-2">
-                    <Navbar title={'Profile'} />
+                    <NavigationBar />
                 </div>
                 <div className="profile-form d-flex justify-content-center flex-column align-items-center">
                     <div className="card">
