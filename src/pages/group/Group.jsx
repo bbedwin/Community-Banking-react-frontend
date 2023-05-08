@@ -8,7 +8,7 @@ import Colors from '../../components/colors/Colors'
 
 const Group = () => {
     const { userInfo } = useContext(ProjectContext)
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
 
     // Get Group ID
     let { id } = useParams();
@@ -81,11 +81,6 @@ const Group = () => {
                         </button>
                     </Link>
 
-                    <Link to={"/repay-loan"}>
-                        <button type="button" className="btn btn-outline-warning my-1 text-light me-2">
-                            <span>Repay Loan</span>
-                        </button>
-                    </Link>
                     <Link to={'/loan-statement'}>
                         <button type="button" className="btn btn-outline-warning my-1  text-light me-2">
                             <span>Loan Statement</span>
@@ -118,12 +113,26 @@ const Group = () => {
                                 <span className='fs-4 fw-bold'>Total Contributions</span> <br />
                                 <small className='fs-5 fw-bold'>KES {groupTotal}</small>
                             </div>
+                            <div>
+                                {
+                                    groupDetails?.group_admin?.id == userInfo.user_id
+                                        ?
+                                        <Link to={`/group-details/${id}`}>
+                                            <button type='button' className="btn btn-primary">
+                                                Update Group Info
+                                            </button>
+                                        </Link>
+                                        :
+                                        null
+                                }
+
+                            </div>
                         </div>
                     </div>
 
                     <div>
                         <div className="d-md-flex justify-content-between align-items-center my-4">
-                            
+
                         </div>
 
                         <div className="card groups-list">
@@ -151,7 +160,7 @@ const Group = () => {
                                                 <li>Announcement 4</li>
                                                 <li>Announcement 5</li>
                                             </ul>
-                                            :<>
+                                            : <>
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">#</th>

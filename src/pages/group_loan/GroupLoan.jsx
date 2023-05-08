@@ -44,6 +44,7 @@ const GroupLoan = () => {
                 setLoanAmount()
                 setLoanPeriod()
                 setPercentageReturn()
+                getGroupLoans()
             }
         } catch (error) {
             toast.warn(error.response.data.status)

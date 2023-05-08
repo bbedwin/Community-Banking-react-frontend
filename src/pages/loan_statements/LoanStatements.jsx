@@ -5,6 +5,7 @@ import axiosClient from '../../components/Axios'
 import NavigationBar from '../../components/NavigationBar/NavigationBar'
 
 const LoanStatements = () => {
+    const navigate = useNavigate()
     const { userInfo } = useContext(ProjectContext)
 
     // Get Group ID
@@ -97,9 +98,10 @@ const LoanStatements = () => {
                                             <th scope="col">Loan ID</th>
                                             <th scope="col">Principal</th>
                                             <th scope="col">Interest</th>
-                                            <th scope="col">Paid at</th>
+                                            <th scope="col">Repay Amount</th>
                                             <th scope="col">Repayment Date</th>
                                             <th scope="col">Status</th>
+                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -111,9 +113,20 @@ const LoanStatements = () => {
                                                         <td>{statement.loan_id}</td>
                                                         <td>KES {statement.principal_amount}</td>
                                                         <td>KES {statement.total_interest_amount}</td>
-                                                        <td>{statement.paid_at | 'null'}</td>
+                                                        <td>{statement.repayment_amount}</td>
                                                         <td>{statement.repayment_date}</td>
                                                         <td>{statement.status}</td>
+                                                        <td>
+                                                            {
+                                                                statement.status == "unpaid"
+                                                                    ?
+                                                                    <Link to="/repay-loan" state={{ loanRepayID: statement.loan_id, loanRepaySerialNo: statement.serial_no, repayAmount: statement.repayment_amount }}>
+                                                                        <button type='button' className="btn btn-primary">Pay</button>
+                                                                    </Link>
+                                                                    :
+                                                                    <button className="btn btn-success">Paid</button>
+                                                            }
+                                                        </td>
                                                     </tr>
                                                 )
                                             })

@@ -27,6 +27,7 @@ import LRepaymentSchedule from './pages/loan_repayment_schedule/loan_repayment_s
 import InvestContribute from './pages/investor/InvestContribute';
 import GroupLoan from './pages/group_loan/GroupLoan';
 import InvestorRegisterGroup from './pages/invest_on_group/investor_register';
+import GroupUpdate from './pages/group_update/GroupUpdate';
 
 function App() {
 
@@ -54,6 +55,7 @@ function App() {
             <Route path='/groups' element={<Groups />}></Route>
             <Route path='/home' element={<CreateOptions />} />
             <Route path='/group/:id' element={<Group />}></Route>
+            <Route path='/group-details/:id' element={<GroupUpdate />}></Route>
             <Route path='/dashboard' element={<Dashboard />}></Route>
             <Route path='/create-group' element={<CreateGroup />}></Route>
             <Route path='/join-group' element={<JoinGroup />}></Route>
